@@ -6,7 +6,7 @@ import CountDown from "../components/CountDown.jsx";
 
 <Layout title="DELTA">
   <main>
-    <img src="/assets/logo.png" alt="Logo" class="logo" />
+    <img src="/assets/logo.svg" alt="Logo" class="logo" />
     <div class="banner">
       <div class="overlay">
         <div>
@@ -84,7 +84,7 @@ import CountDown from "../components/CountDown.jsx";
   }
 
   .logo {
-    margin-top: var(--margin-top);
+    margin: calc(2 * var(--margin-top)) 0;
     height: 10vh;
   }
 
@@ -95,7 +95,6 @@ import CountDown from "../components/CountDown.jsx";
   }
 
   .banner {
-    margin-top: var(--margin-top);
     height: 72vh;
     width: 78%;
     border-radius: 40px;
