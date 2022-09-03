@@ -5,11 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && tsc --noEmit && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.1.5"
+    "astro": "^1.1.5",
+    "dayjs": "^1.11.5"
+  },
+  "devDependencies": {
+    "@astrojs/solid-js": "^1.1.0",
+    "solid-js": "^1.4.3"
   }
 }
