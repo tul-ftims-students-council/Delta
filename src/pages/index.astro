@@ -6,7 +6,7 @@ import CountDown from "../components/CountDown.jsx";
 
 <Layout title="DELTA">
   <main>
-    <div class="wrapper"> 
+    <div class="wrapper">
       <img src="/assets/logo.svg" alt="Logo" class="logo" />
       <div class="banner">
         <div class="overlay">
@@ -56,7 +56,6 @@ import CountDown from "../components/CountDown.jsx";
         </div>
       </div>
     </div>
-    <p class="moreInfo">więcej informacji wkrótce...</p>
   </main>
 </Layout>
 
@@ -64,7 +63,15 @@ import CountDown from "../components/CountDown.jsx";
   h1,
   h2,
   h3 {
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  h1 {
+    font-weight: 800;
+  }
+
+  h2 {
+    font-weight: 600;
   }
 
   .wrapper {
@@ -107,7 +114,7 @@ import CountDown from "../components/CountDown.jsx";
   .banner {
     height: 72vh;
     width: 78vw;
-    border-radius: 40px;
+    border-radius: clamp(10px, 2vw, 40px);
     background-image: url(/assets/banner.svg);
     background-position: center;
     background-size: cover;
@@ -134,7 +141,7 @@ import CountDown from "../components/CountDown.jsx";
   .card {
     background: rgba(255, 255, 255, 0.98);
     box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
-    border-radius: 40px;
+    border-radius: clamp(10px, 2vw, 40px);
     height: 14vh;
     width: 62.5vw;
     display: flex;
@@ -149,33 +156,18 @@ import CountDown from "../components/CountDown.jsx";
     padding: 0;
   }
 
-  .moreInfo {
-    text-transform: uppercase;
-    font-family: "Inter var";
-    font-weight: bold;
-    margin-bottom: 4vh;
-  }
-
-  @media (max-width: 1024px){
+  @media (max-width: 768px) {
     .card {
       width: 70vw;
     }
-  }
 
-  @media (min-width: 580px) {
-    .moreInfo {
-      display: none;
-    }
-  }
-
-  @media (max-width: 580px) {
     body h1 {
-      font-size: 10vw;
+      font-size: 9vw;
       margin-top: 2vh;
     }
 
     body h2 {
-      font-size: 1.5vh;
+      font-size: 2vh;
     }
 
     .list {
@@ -190,7 +182,7 @@ import CountDown from "../components/CountDown.jsx";
     }
 
     .list {
-      padding: 10px
+      padding: 10px;
     }
 
     .banner {
@@ -206,6 +198,10 @@ import CountDown from "../components/CountDown.jsx";
   @media (max-width: 420px) {
     .list {
       padding: 20px;
+    }
+
+    .banner {
+      background-image: url(/assets/banner mobile.svg);
     }
   }
 </style>

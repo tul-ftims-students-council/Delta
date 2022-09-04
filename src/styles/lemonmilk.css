@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkLight") format("otf");
+}
+
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkLightItalic") format("otf");
+}
+
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkRegular") format("otf");
+}
+
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkRegulatItalic") format("otf");
+}
+
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkBold") format("otf");
+}
+
+@font-face {
+  font-family: "Lemon Milk";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/lemonmilk/LemonMilkBoldItalic") format("otf");
+}
