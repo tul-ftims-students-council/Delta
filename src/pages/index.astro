@@ -6,54 +6,57 @@ import CountDown from "../components/CountDown.jsx";
 
 <Layout title="DELTA">
   <main>
-    <img src="/assets/logo.svg" alt="Logo" class="logo" />
-    <div class="banner">
-      <div class="overlay">
-        <div>
-          <h1>DELTA</h1>
-          <h2 class="subtitle">WYJAZD SZKOLENIOWO-INTEGRACYJNY</h2>
-        </div>
-        <div class="center">
-          <CountDown client:load />
-          <div class="card">
-            <ul class="list">
-              <Card
-                icon={{
-                  src: "/assets/icons/wallet.png",
-                  alt: "wallet icon",
-                }}
-                title="KOSZT"
-                value="350zł"
-              />
-              <Card
-                icon={{
-                  src: "/assets/icons/location.png",
-                  alt: "location icon",
-                }}
-                title="LOKALIZACJA"
-                value="Ośrodek Marysieńka"
-              />
-              <Card
-                icon={{
-                  src: "/assets/icons/calendar.png",
-                  alt: "calendar icon",
-                }}
-                title="TERMIN"
-                value="20-23 października"
-              />
-              <Card
-                icon={{
-                  src: "/assets/icons/people.png",
-                  alt: "people icon",
-                }}
-                title="LICZBA MIEJSC"
-                value="90"
-              />
-            </ul>
+    <div class="wrapper"> 
+      <img src="/assets/logo.svg" alt="Logo" class="logo" />
+      <div class="banner">
+        <div class="overlay">
+          <div>
+            <h1>DELTA</h1>
+            <h2 class="subtitle">WYJAZD SZKOLENIOWO-INTEGRACYJNY</h2>
+          </div>
+          <div class="center">
+            <CountDown client:load />
+            <div class="card">
+              <ul class="list">
+                <Card
+                  icon={{
+                    src: "/assets/icons/wallet.png",
+                    alt: "wallet icon",
+                  }}
+                  title="KOSZT"
+                  value="350zł"
+                />
+                <Card
+                  icon={{
+                    src: "/assets/icons/location.png",
+                    alt: "location icon",
+                  }}
+                  title="LOKALIZACJA"
+                  value="Ośrodek Marysieńka"
+                />
+                <Card
+                  icon={{
+                    src: "/assets/icons/calendar.png",
+                    alt: "calendar icon",
+                  }}
+                  title="TERMIN"
+                  value="20-23 października"
+                />
+                <Card
+                  icon={{
+                    src: "/assets/icons/people.png",
+                    alt: "people icon",
+                  }}
+                  title="LICZBA MIEJSC"
+                  value="90"
+                />
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <p class="moreInfo">więcej informacji wkrótce...</p>
   </main>
 </Layout>
 
@@ -62,6 +65,12 @@ import CountDown from "../components/CountDown.jsx";
   h2,
   h3 {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .list {
@@ -81,6 +90,7 @@ import CountDown from "../components/CountDown.jsx";
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
 
   .logo {
@@ -96,7 +106,7 @@ import CountDown from "../components/CountDown.jsx";
 
   .banner {
     height: 72vh;
-    width: 78%;
+    width: 78vw;
     border-radius: 40px;
     background-image: url(/assets/banner.svg);
     background-position: center;
@@ -132,5 +142,70 @@ import CountDown from "../components/CountDown.jsx";
     color: #300f06;
     margin-top: calc(var(--margin-top) + 5px);
     margin-bottom: -7vh;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .moreInfo {
+    text-transform: uppercase;
+    font-family: "Inter var";
+    font-weight: bold;
+    margin-bottom: 4vh;
+  }
+
+  @media (max-width: 1024px){
+    .card {
+      width: 70vw;
+    }
+  }
+
+  @media (min-width: 580px) {
+    .moreInfo {
+      display: none;
+    }
+  }
+
+  @media (max-width: 580px) {
+    body h1 {
+      font-size: 10vw;
+      margin-top: 2vh;
+    }
+
+    body h2 {
+      font-size: 1.5vh;
+    }
+
+    .list {
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 88vw;
+      height: 28vh;
+      margin-bottom: -32vh;
+      margin-top: 6.5vh;
+    }
+
+    .list {
+      padding: 10px
+    }
+
+    .banner {
+      height: 40vh;
+      width: 88vw;
+    }
+
+    .logo {
+      margin: calc(3 * var(--margin-top)) 0;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .list {
+      padding: 20px;
+    }
   }
 </style>

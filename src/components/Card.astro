@@ -48,4 +48,45 @@ const { icon, title, value } = Astro.props;
     font-size: 1vw;
     color: var(--main-color);
   }
+
+  @media (max-width: 1024px){
+    h5 {
+      font-size: 1.2vw;
+    }
+    p {
+      font-size: 1.3vw;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .list-item {
+      border-right: none;
+      width: 50%;
+    }
+    h5 {
+      font-size: 3vw;
+    }
+    p {
+      font-size: 3.1vw;
+    }
+    body .icon {
+      width: 4vw;
+      height: 4vw;
+      margin-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    h5 {
+      font-size: 3.6vw;
+    }
+    p {
+      font-size: 3.7vw;
+    }
+    body .icon {
+      width: 6vw;
+      height: 6vw;
+      margin-bottom: 4px;
+    }
+  }
 </style>
