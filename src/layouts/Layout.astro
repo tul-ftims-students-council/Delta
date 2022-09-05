@@ -5,7 +5,6 @@ export interface Props {
 
 const { title } = Astro.props;
 import "../styles/inter.css";
-import "../styles/lemonmilk.css";
 ---
 
 <!DOCTYPE html>
@@ -14,6 +13,12 @@ import "../styles/lemonmilk.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      @font-face {
+        font-family: "Lemon Milk";
+        src: url("/fonts/lemonmilk.woff") format("woff");
+      }
+    </style>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -51,7 +56,7 @@ import "../styles/lemonmilk.css";
 
     <style is:global>
       h1 {
-        font-size: clamp(1.5rem, 4.2vw, 5rem);
+        font-size: clamp(1.5rem, 5vw, 5rem);
       }
 
       h2 {
@@ -75,13 +80,7 @@ import "../styles/lemonmilk.css";
         margin: 0;
       }
 
-      @media (max-width: 1024px) {
-        .countdown {
-          font-size: 2.5vw;
-        }
-      }
-
-      @media (max-width: 420px) {
+      @media (max-width: 425px) {
         .countdown {
           font-size: 5vw;
         }

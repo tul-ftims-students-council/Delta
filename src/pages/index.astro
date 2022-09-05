@@ -7,7 +7,7 @@ import CountDown from "../components/CountDown.jsx";
 <Layout title="DELTA">
   <main>
     <div class="wrapper">
-      <img src="/assets/logo.svg" alt="Logo" class="logo" />
+      <img src="/assets/logo.png" alt="Logo" class="logo" />
       <div class="banner">
         <div class="overlay">
           <div>
@@ -23,7 +23,7 @@ import CountDown from "../components/CountDown.jsx";
                     src: "/assets/icons/wallet.png",
                     alt: "wallet icon",
                   }}
-                  title="KOSZT"
+                  title="KOSZT WYJAZDU"
                   value="350zł"
                 />
                 <Card
@@ -71,11 +71,12 @@ import CountDown from "../components/CountDown.jsx";
   }
 
   h2 {
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .wrapper {
     display: flex;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
   }
@@ -103,6 +104,7 @@ import CountDown from "../components/CountDown.jsx";
   .logo {
     margin: calc(2 * var(--margin-top)) 0;
     height: 10vh;
+    width: max-content;
   }
 
   .center {
@@ -115,7 +117,7 @@ import CountDown from "../components/CountDown.jsx";
     height: 72vh;
     width: 78vw;
     border-radius: clamp(10px, 2vw, 40px);
-    background-image: url(/assets/banner.svg);
+    background-image: url("/assets/banner.svg");
     background-position: center;
     background-size: cover;
     position: relative;
@@ -161,15 +163,6 @@ import CountDown from "../components/CountDown.jsx";
       width: 70vw;
     }
 
-    body h1 {
-      font-size: 9vw;
-      margin-top: 2vh;
-    }
-
-    body h2 {
-      font-size: 2vh;
-    }
-
     .list {
       flex-wrap: wrap;
     }
@@ -195,13 +188,13 @@ import CountDown from "../components/CountDown.jsx";
     }
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 425px) {
     .list {
       padding: 20px;
     }
 
     .banner {
-      background-image: url(/assets/banner mobile.svg);
+      background-image: url("/assets/banner_mobile.svg");
     }
   }
 </style>

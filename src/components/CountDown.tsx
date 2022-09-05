@@ -19,10 +19,10 @@ const CountDown = () => {
   onCleanup(() => clearInterval(interval));
 
   return (
-    <h3 class="countdown">
+    <h2 class="countdown">
       {currentDate().days} DNI {currentDate().hours} GODZIN{" "}
       {currentDate().minutes} MINUT
-    </h3>
+    </h2>
   );
 };
 
