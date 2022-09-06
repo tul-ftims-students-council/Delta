@@ -5,6 +5,7 @@ export interface Props {
 
 const { title } = Astro.props;
 import "../styles/inter.css";
+import "../styles/lemonmilk.css";
 ---
 
 <!DOCTYPE html>
@@ -13,12 +14,6 @@ import "../styles/inter.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      @font-face {
-        font-family: "Lemon Milk";
-        src: url("/fonts/lemonmilk.woff") format("woff");
-      }
-    </style>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
