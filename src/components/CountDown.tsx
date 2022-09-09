@@ -1,14 +1,11 @@
-import dayjs from "dayjs";
-import { createSignal, onCleanup } from "solid-js";
+import dayjs from 'dayjs';
+import { createSignal, onCleanup } from 'solid-js';
 
-const endDate = dayjs("October 20, 2022 00:00:00");
+const endDate = dayjs('October 20, 2022 00:00:00');
 const getDate = (date: dayjs.Dayjs) => {
-  const days = endDate.diff(date, "days");
-  const hours = endDate.subtract(days, "days").diff(date, "hours");
-  const minutes = endDate
-    .subtract(days, "days")
-    .subtract(hours, "hours")
-    .diff(date, "minutes");
+  const days = endDate.diff(date, 'days');
+  const hours = endDate.subtract(days, 'days').diff(date, 'hours');
+  const minutes = endDate.subtract(days, 'days').subtract(hours, 'hours').diff(date, 'minutes');
   return { days, hours, minutes };
 };
 
@@ -20,8 +17,7 @@ const CountDown = () => {
 
   return (
     <h2 class="countdown">
-      {currentDate().days} DNI {currentDate().hours} GODZIN{" "}
-      {currentDate().minutes} MINUT
+      {currentDate().days} DNI {currentDate().hours} GODZIN {currentDate().minutes} MINUT
     </h2>
   );
 };
