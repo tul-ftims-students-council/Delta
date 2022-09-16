@@ -4,7 +4,7 @@ export interface Props {
 }
 
 const { title } = Astro.props;
-import "../styles/lemonmilk.css";
+import '../styles/lemonmilk.css';
 ---
 
 <!DOCTYPE html>
@@ -16,17 +16,14 @@ import "../styles/lemonmilk.css";
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body>
     <slot />
     <style>
       :root {
-        --font-family: "Lemon Milk";
+        --font-family: 'Lemon Milk';
 
         --main-color: #f49535;
 

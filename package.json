@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --config ./.prettierrc --plugin-search-dir=. --write ."
   },
   "dependencies": {
     "astro": "^1.1.5",
@@ -15,6 +16,8 @@
   },
   "devDependencies": {
     "@astrojs/solid-js": "^1.1.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.5.4",
     "solid-js": "^1.4.3"
   }
 }
