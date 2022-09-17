@@ -23,7 +23,8 @@ import '../styles/lemonmilk.css';
     <slot />
     <style>
       :root {
-        --font-family: 'Lemon Milk';
+        --font-family-lemonmilk: 'Lemon Milk';
+        --font-family-inter: 'Inter';
 
         --main-color: #f49535;
 
@@ -34,13 +35,16 @@ import '../styles/lemonmilk.css';
         --color-text: hsl(12, 5%, 4%);
         --color-bg: hsl(10, 21%, 95%);
         --color-border: hsl(17, 24%, 90%);
+        --color-white: hsl(0, 0%, 100%);
 
         --margin-top: 0.5rem;
         --icon-size: 2vw;
+
+        --padding-side: 120px;
       }
 
       html {
-        font-family: var(--font-family), system-ui, sans-serif;
+        font-family: var(--font-family-lemonmilk), var(--font-family-inter), system-ui, sans-serif;
         font-size: var(--font-size-base);
         color: var(--color-text);
         background-color: var(--color-bg);
