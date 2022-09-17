@@ -1,21 +1,38 @@
 <footer class="footer-wrapper">
-  <div class="content-wrapper">
-    <div class="logos-wrapper">
-      <img class="logo" src="/assets/logo_wrs.svg" />
-      <img class="logo" src="/assets/logo_sspl.png" />
+  <div class="footer-container">
+    <div class="content-wrapper">
+      <div class="logos-wrapper">
+        <img class="logo" src="/assets/logo_wrs.svg" alt="Logo WRS FTIMS" />
+        <img class="logo" src="/assets/logo_sspl.png" alt="Logo SSPŁ" />
+      </div>
+      <div class="social-wrapper">
+        <h3 class="social-header">Znajdź nas na social mediach:</h3>
+        <div class="social-row-wrapper">
+          <img class="social-logo" src="/assets/logo_facebook.png" alt="Logo Facebook" />
+          <p class="social-row-text">Delta Wyjazd Integracyjny Wydziału FTIMS PŁ</p>
+        </div>
+        <div class="social-row-wrapper">
+          <img class="social-logo" src="/assets/logo_instagram.png" alt="Logo Instagram" />
+          <p class="social-row-text">WRS WFTIMS PŁ</p>
+        </div>
+      </div>
     </div>
-    <div class="social-wrapper"></div>
+    <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
   </div>
-  <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
 </footer>
 
 <style>
-  .footer-wrapper {
+  .footer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 20px var(--padding-side);
+    margin: 0 auto;
+    padding: 20px 0;
+    max-width: var(--container-max-width);
+  }
+
+  .footer-wrapper {
     background-color: var(--main-color);
   }
 
@@ -40,7 +57,33 @@
   .social-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
+  }
+
+  .social-header {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-white);
+    text-transform: uppercase;
+  }
+
+  .social-row-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .social-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .social-row-text {
+    font-family: var(--font-family-inter);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-white);
   }
 
   .copyright {
