@@ -22,6 +22,11 @@
 </footer>
 
 <style>
+  .footer-wrapper {
+    background-color: var(--secondary-color);
+    padding: 0 20px;
+  }
+
   .footer-container {
     display: flex;
     flex-direction: column;
@@ -30,10 +35,6 @@
     margin: 0 auto;
     padding: 20px 0;
     max-width: var(--container-max-width);
-  }
-
-  .footer-wrapper {
-    background-color: var(--main-color);
   }
 
   .content-wrapper {
@@ -45,24 +46,24 @@
 
   .logos-wrapper {
     display: flex;
-    gap: 60px;
+    gap: 24px;
     align-items: center;
   }
 
   .logo {
     width: auto;
-    height: 100px;
+    height: 44px;
   }
 
   .social-wrapper {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
 
   .social-header {
-    font-size: 16px;
+    display: none;
+    font-size: 14px;
     font-weight: 500;
     color: var(--color-white);
     text-transform: uppercase;
@@ -76,21 +77,77 @@
   }
 
   .social-logo {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
   }
 
   .social-row-text {
+    display: none;
     font-family: var(--font-family-inter);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--color-white);
   }
 
   .copyright {
+    text-align: center;
     font-family: var(--font-family-inter);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--color-white);
+  }
+
+  @media (min-width: 43rem) {
+    .logos-wrapper {
+      gap: 40px;
+    }
+
+    .logo {
+      height: 72px;
+    }
+
+    .social-wrapper {
+      flex-direction: column;
+    }
+
+    .social-header {
+      display: block;
+    }
+
+    .social-logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .social-row-text {
+      display: block;
+    }
+
+    .copyright {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .logos-wrapper {
+      gap: 60px;
+    }
+
+    .logo {
+      height: 100px;
+    }
+
+    .social-header {
+      font-size: 16px;
+    }
+
+    .social-row-text {
+      font-size: 16px;
+    }
+
+    .social-logo {
+      width: 48px;
+      height: 48px;
+    }
   }
 </style>
