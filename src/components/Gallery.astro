@@ -12,14 +12,38 @@ import SectionSubtitle from './SectionSubtitle.astro';
       <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
     </div>
     <div class="img-grid">
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
-      <GalleryImage src="https://via.placeholder.com/300" alt="Gallery image" />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
+      <GalleryImage
+        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+        alt="Gallery image"
+      />
     </div>
     <div class="description-wrapper bottom">
       <p class="description-text">Zainteresowany?</p>
@@ -52,6 +76,7 @@ import SectionSubtitle from './SectionSubtitle.astro';
     width: 100%;
     border-radius: 10px;
     aspect-ratio: 1 / 1;
+    object-fit: cover;
   }
 
   .bottom {
