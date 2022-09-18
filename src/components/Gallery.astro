@@ -1,8 +1,8 @@
 ---
-import GalleryImage from './GalleryImage.astro';
 import OrangeContainer from './OrangeContainer.astro';
 import SectionHeader from './SectionHeader.astro';
 import SectionSubtitle from './SectionSubtitle.astro';
+import GalleryImage from './GalleryImage';
 ---
 
 <OrangeContainer>
@@ -12,38 +12,15 @@ import SectionSubtitle from './SectionSubtitle.astro';
       <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
     </div>
     <div class="img-grid">
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
-      <GalleryImage
-        src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-        alt="Gallery image"
-      />
+      {
+        [...Array(8).keys()].map(() => (
+          <GalleryImage
+            src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+            alt="Gallery image"
+            client:visible
+          />
+        ))
+      }
     </div>
     <div class="description-wrapper bottom">
       <p class="description-text">Zainteresowany?</p>
