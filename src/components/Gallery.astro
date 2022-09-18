@@ -5,22 +5,94 @@ import SectionSubtitle from './SectionSubtitle.astro';
 ---
 
 <OrangeContainer>
-  <SectionHeader>Galeria</SectionHeader>
-  <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
-  <div class="img-grid">
-    <img src="" alt="" />
+  <div class="content-wrapper">
+    <div class="description-wrapper">
+      <SectionHeader>Galeria</SectionHeader>
+      <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
+    </div>
+    <div class="img-grid">
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+      <img class="gallery-img" src="https://via.placeholder.com/300" alt="Gallery image" />
+    </div>
+    <div class="description-wrapper bottom">
+      <p class="description-text">Zainteresowany?</p>
+      <button>Pokaż mi więcej</button>
+    </div>
   </div>
-  <p>Zainteresowany?</p>
-  <button>Pokaż mi więcej</button>
 </OrangeContainer>
 
 <style>
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .description-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-img {
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .bottom {
+    align-self: flex-end;
+    gap: 10px;
+  }
+
+  .description-text {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-white);
+    text-transform: uppercase;
   }
 
   @media (min-width: 43rem) {
+    .img-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .gallery-img {
+      border-radius: 12px;
+    }
+
+    .description-text {
+      font-size: 16px;
+    }
   }
 
   @media (min-width: 62rem) {
+    .img-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .gallery-img {
+      border-radius: 16px;
+    }
+
+    .description-text {
+      font-size: 20px;
+    }
   }
 </style>
