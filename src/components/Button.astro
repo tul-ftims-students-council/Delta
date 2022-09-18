@@ -1,0 +1,89 @@
+---
+interface LinkProps {
+  type: 'link';
+  href: string;
+}
+
+interface ButtonProps {
+  type: astroHTML.JSX.ButtonHTMLAttributes['type'];
+}
+
+type Props = { variant?: 'primary' | 'secondary' } & (LinkProps | ButtonProps);
+
+const { variant = 'primary', type, href } = Astro.props;
+---
+
+{
+  type === 'link' ? (
+    <a href={href} class={`button ${variant}`}>
+      <slot />
+    </a>
+  ) : (
+    <button class={`button ${variant}`} type={type}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .button {
+    margin: 0;
+    padding: 12px 19px;
+    border: none;
+
+    font-family: var(--font-primary);
+    text-align: center;
+    font-size: 12px;
+
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+
+    text-decoration: none;
+    transition: background-color 200ms;
+  }
+
+  .button:hover {
+    cursor: pointer;
+  }
+
+  .button.primary {
+    background-color: var(--orange);
+    color: var(--white);
+  }
+
+  .button.primary:hover {
+    background-color: var(--yellow);
+  }
+
+  .button.primary:active {
+    background-color: var(--orange2);
+  }
+
+  .button.primary:focus {
+    background-color: var(--brown);
+  }
+
+  .button.secondary {
+    background-color: var(--white);
+    color: var(--orange);
+  }
+
+  .button.secondary:hover {
+    color: var(--yellow);
+  }
+
+  .button.secondary:active {
+    color: var(--orange2);
+  }
+
+  .button.secondary:focus {
+    color: var(--brown);
+  }
+
+  @media (min-width: 768px) {
+    .button {
+      padding: 8px 21px;
+      font-size: 14px;
+    }
+  }
+</style>

@@ -23,9 +23,14 @@ import '../styles/lemonmilk.css';
     <slot />
     <style>
       :root {
-        --font-family: 'Lemon Milk';
+        --font-primary: 'Lemon Milk';
 
         --main-color: #f49535;
+        --white: #fff;
+        --yellow: #ffb039;
+        --orange: #e4780c;
+        --orange2: #f49535;
+        --brown: #300f07;
 
         --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
         /* --font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
@@ -40,7 +45,7 @@ import '../styles/lemonmilk.css';
       }
 
       html {
-        font-family: var(--font-family), system-ui, sans-serif;
+        font-family: var(--font-primary), system-ui, sans-serif;
         font-size: var(--font-size-base);
         color: var(--color-text);
         background-color: var(--color-bg);
