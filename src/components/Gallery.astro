@@ -32,7 +32,7 @@ import SectionSubtitle from './SectionSubtitle.astro';
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 32px;
+    gap: 10px;
   }
 
   .description-wrapper {
@@ -67,6 +67,10 @@ import SectionSubtitle from './SectionSubtitle.astro';
   }
 
   @media (min-width: 43rem) {
+    .content-wrapper {
+      gap: 20px;
+    }
+
     .img-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -82,6 +86,10 @@ import SectionSubtitle from './SectionSubtitle.astro';
   }
 
   @media (min-width: 62rem) {
+    .content-wrapper {
+      gap: 32px;
+    }
+
     .img-grid {
       grid-template-columns: repeat(4, 1fr);
       gap: 40px;
