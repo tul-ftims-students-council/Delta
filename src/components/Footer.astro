@@ -1,42 +1,29 @@
-<footer class="footer-wrapper">
-  <div class="footer-container">
-    <div class="content-wrapper">
-      <div class="logos-wrapper">
-        <img class="logo" src="/assets/logo_wrs.svg" alt="Logo WRS FTIMS" />
-        <img class="logo" src="/assets/logo_sspl.png" alt="Logo SSPŁ" />
-      </div>
-      <div class="social-wrapper">
-        <h3 class="social-header">Znajdź nas na social mediach:</h3>
-        <a class="social-row-wrapper" target="_blank" href="#">
-          <img class="social-logo" src="/assets/logo_facebook.png" alt="Logo Facebook" />
-          <p class="social-row-text">Delta Wyjazd Integracyjny Wydziału FTIMS PŁ</p>
-        </a>
-        <a class="social-row-wrapper" target="_blank" href="#">
-          <img class="social-logo" src="/assets/logo_instagram.png" alt="Logo Instagram" />
-          <p class="social-row-text">WRS WFTIMS PŁ</p>
-        </a>
-      </div>
+---
+import OrangeContainer from './OrangeContainer.astro';
+---
+
+<OrangeContainer>
+  <div class="content-wrapper">
+    <div class="logos-wrapper">
+      <img class="logo" src="/assets/logo_wrs.svg" alt="Logo WRS FTIMS" />
+      <img class="logo" src="/assets/logo_sspl.png" alt="Logo SSPŁ" />
     </div>
-    <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
+    <div class="social-wrapper">
+      <h3 class="social-header">Znajdź nas na social mediach:</h3>
+      <a class="social-row-wrapper" target="_blank" href="#">
+        <img class="social-logo" src="/assets/logo_facebook.png" alt="Logo Facebook" />
+        <p class="social-row-text">Delta Wyjazd Integracyjny Wydziału FTIMS PŁ</p>
+      </a>
+      <a class="social-row-wrapper" target="_blank" href="#">
+        <img class="social-logo" src="/assets/logo_instagram.png" alt="Logo Instagram" />
+        <p class="social-row-text">WRS WFTIMS PŁ</p>
+      </a>
+    </div>
   </div>
-</footer>
+  <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
+</OrangeContainer>
 
 <style>
-  .footer-wrapper {
-    background-color: var(--secondary-color);
-    padding: 0 20px;
-  }
-
-  .footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin: 0 auto;
-    padding: 20px 0;
-    max-width: var(--container-max-width);
-  }
-
   .content-wrapper {
     align-self: stretch;
     display: flex;
