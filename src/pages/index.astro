@@ -57,9 +57,9 @@ import Footer from '../components/Footer.astro';
           </div>
         </div>
       </div>
+      <FAQ />
     </div>
   </main>
-  <FAQ />
   <Footer />
 </Layout>
 
@@ -80,6 +80,7 @@ import Footer from '../components/Footer.astro';
 
   .wrapper {
     display: flex;
+    margin: 0 11vw;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -97,7 +98,6 @@ import Footer from '../components/Footer.astro';
   }
 
   main {
-    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -118,7 +118,8 @@ import Footer from '../components/Footer.astro';
 
   .banner {
     height: 72vh;
-    width: 78vw;
+    width: 100%;
+    margin-bottom: 7vh;
     border-radius: clamp(10px, 2vw, 40px);
     background-image: url('/assets/banner.svg');
     background-position: center;
