@@ -26,12 +26,28 @@ const schema = z.object({
     .string()
     .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
     .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
-  surname: z.string(),
-  email: z.string().email().min(1),
-  confirmEmail: z.string().email().min(1),
+  surname: z
+    .string()
+    .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
+    .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
+  email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
+  confirmEmail: z
+    .string()
+    .email({ message: 'Niepoprawny adres email' })
+    .min(1, { message: 'To pole nie może być puste' }),
+  // Nie działa - nie wyświetla poprawnie błędu
+  // emailForm: z
+  //   .object({
+  //     email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
+  //     confirmEmail: z
+  //       .string()
+  //       .email({ message: 'Niepoprawny adres email' })
+  //       .min(1, { message: 'To pole nie może być puste' }),
+  //   })
+  //   .refine((data) => data.email === data.confirmEmail, { message: 'Podane adresy email różnią się od siebie' }),
   phoneNumber: z.string(),
-  regulamin: z.boolean(),
-  zgoda: z.boolean(),
+  rodo: z.literal(true),
+  regulamin: z.literal(true),
 });
 
 type FormSchema = z.infer<typeof schema>;
@@ -40,7 +56,7 @@ const RegisterForm: Component = () => {
   const [isAgreementClicked, setIsAgreementClicked] = createSignal(false);
   const [isRodoClicked, setIsRodoClicked] = createSignal(false);
 
-  const { form } = createForm<FormSchema>({
+  const { form, validate, data, errors } = createForm<FormSchema>({
     extend: [validator({ schema }), reporter()],
     onSubmit: (values) => {
       console.log({ values });
@@ -69,6 +85,10 @@ const RegisterForm: Component = () => {
               <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
             </Row>
             <Row>
+              <Input name="emailForm.email" label="Email" placeholder="przykladowy@email.com"></Input>
+              <Input name="emailForm.confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
+            </Row>
+            <Row>
               <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420"></Input>
             </Row>
             {/* <CheckboxContainer>
@@ -91,7 +111,21 @@ const RegisterForm: Component = () => {
               setIsChecked={setIsAgreementClicked}
             />
 
-            <button type="submit">submit</button>
+            {!!errors().rodo || !!errors().regulamin ? (
+              <ErrorMessage>Musisz zaakceptować powyższe zgody</ErrorMessage>
+            ) : null}
+
+            <button
+              type="submit"
+              onClick={() => {
+                console.log(data());
+                console.log(errors());
+
+                validate();
+              }}
+            >
+              submit
+            </button>
           </form>
         </FormWrapper>
       </MainContent>
@@ -117,6 +151,16 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
+`;
+
+const ErrorMessage = styled.span`
+  color: red;
+  font-family: Inter;
+  margin-top: 2px;
+  font-size: 10px;
+  min-height: 12px;
+  font-weight: 300;
+  display: block;
 `;
 
 const CheckboxContainer = styled.div`

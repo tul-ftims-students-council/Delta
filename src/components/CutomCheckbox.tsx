@@ -18,7 +18,7 @@ const CustomCheckbox = ({ id, label, isChecked, setIsChecked }: CheckboxProps) =
         checked={isChecked}
         onChange={() => setIsChecked((isChecked) => !isChecked)}
       />
-      <label for={id}>{label}</label>
+      <label for={id} innerHTML={label}></label>
     </CheckboxWrapper>
   );
 };
