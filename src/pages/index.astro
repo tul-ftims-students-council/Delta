@@ -2,9 +2,12 @@
 import Card from '../components/Card.astro';
 import Layout from '../layouts/Layout.astro';
 import CountDown from '../components/CountDown.jsx';
+import RegisterForm from '../components/RegisterForm';
 ---
 
 <Layout title="DELTA">
+  <RegisterForm client:only="solid-js"/>
+
   <main>
     <div class="wrapper">
       <img src="/assets/logo.png" alt="Logo" class="logo" />
