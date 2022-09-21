@@ -3,8 +3,10 @@ export interface Props {
   title: string;
 }
 
+import routes from '../utils/routes';
 const { title } = Astro.props;
 import '../styles/lemonmilk.css';
+import Header from '../components/Header';
 ---
 
 <!DOCTYPE html>
@@ -20,15 +22,27 @@ import '../styles/lemonmilk.css';
     <title>{title}</title>
   </head>
   <body>
+    <Header client:only="solid-js" activeRoute={routes.home} />
     <slot />
     <style>
       :root {
         --font-primary: 'Lemon Milk';
         --font-secondary: 'Inter';
+        
+        --main-color: hsl(30, 90%, 47%);
+        --main-color-hover: hsl(36, 100%, 61%);
+        --main-color-active: hsl(30, 90%, 58%);
 
+        --sec-color: hsl(12, 75%, 11%);
+
+        --error: hsl(0, 100%, 43%);
+
+        --white: hsl(0, 0%, 100%);
+        --gray-color-80: hsl(12, 75%, 11%, 8%);
+        --gray-color-250: hsl(12, 75%, 11%, 25%);
+        
         --color-primary: #f49535;
         --color-secondary: #d26414;
-        --white: #fff;
         --yellow: #ffb039;
         --orange: #e4780c;
         --orange2: #f49535;
@@ -74,6 +88,17 @@ import '../styles/lemonmilk.css';
     </style>
 
     <style is:global>
+      * {
+        box-sizing: border-box;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 0.5rem;
+      }
+
       h1 {
         font-size: clamp(1.5rem, 5vw, 5rem);
       }
