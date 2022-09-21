@@ -2,6 +2,9 @@
 import Card from '../components/Card.astro';
 import Layout from '../layouts/Layout.astro';
 import CountDown from '../components/CountDown.jsx';
+import Footer from '../components/Footer.astro';
+import Gallery from '../components/Gallery.astro';
+import CallToAction from '../components/CallToAction.astro';
 ---
 
 <Layout title="DELTA">
@@ -56,7 +59,10 @@ import CountDown from '../components/CountDown.jsx';
         </div>
       </div>
     </div>
+    <Gallery />
+    <CallToAction />
   </main>
+  <Footer />
 </Layout>
 
 <style>
@@ -68,6 +74,7 @@ import CountDown from '../components/CountDown.jsx';
 
   h1 {
     font-weight: 800;
+    text-align: center;
   }
 
   h2 {
@@ -93,12 +100,11 @@ import CountDown from '../components/CountDown.jsx';
   }
 
   main {
-    height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 100px;
+    padding-bottom: 150px;
   }
 
   .logo {
