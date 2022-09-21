@@ -26,7 +26,7 @@ const { icon, title, value } = Astro.props;
     justify-content: space-between;
     gap: 4px;
     width: 25%;
-    border-right: 1px solid #1d0a06;
+    border-right: 1px solid var(--sec-color);
   }
 
   .list-item:last-of-type {
@@ -44,10 +44,10 @@ const { icon, title, value } = Astro.props;
   }
 
   p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-secondary);
     font-weight: 600;
     font-size: 1.04vw;
-    color: var(--main-color);
+    color: var(--color-primary);
   }
 
   @media (max-width: 768px) {
