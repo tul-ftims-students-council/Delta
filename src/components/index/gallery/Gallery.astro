@@ -1,0 +1,96 @@
+---
+import OrangeContainer from 'components/shared/OrangeContainer.astro';
+import SectionHeader from 'components/shared/SectionHeader.astro';
+import SectionSubtitle from 'components/shared/SectionSubtitle.astro';
+import Button from 'components/shared/Button.astro';
+
+import GalleryImage from './GalleryImage';
+---
+
+<OrangeContainer>
+  <div class="content-wrapper">
+    <div class="description-wrapper">
+      <SectionHeader>Galeria</SectionHeader>
+      <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
+    </div>
+    <div class="img-grid">
+      {
+        [...Array(8).keys()].map(() => (
+          <GalleryImage
+            src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
+            alt="Gallery image"
+            client:visible
+          />
+        ))
+      }
+    </div>
+    <div class="description-wrapper bottom">
+      <p class="description-text">Zainteresowany?</p>
+      <Button type="link" href="#" variant="secondary">Pokaż mi więcej</Button>
+    </div>
+  </div>
+</OrangeContainer>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .description-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .bottom {
+    align-self: flex-end;
+    gap: 10px;
+  }
+
+  .description-text {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 43rem) {
+    .content-wrapper {
+      gap: 20px;
+    }
+
+    .img-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .description-text {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .content-wrapper {
+      gap: 32px;
+    }
+
+    .img-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .description-text {
+      font-size: 20px;
+    }
+  }
+</style>

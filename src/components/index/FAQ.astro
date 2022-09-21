@@ -1,0 +1,106 @@
+---
+import Container from 'components/shared/Container.astro';
+
+interface Section {
+  header: string;
+  description: string;
+  imageUrl: string;
+}
+
+const sections: Section[] = [
+  {
+    header: 'CO MAM ZABRAĆ NA WYJAZD?',
+    description:
+      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
+    imageUrl: '/assets/FAQ/cactus.png',
+  },
+  {
+    header: 'CZY MOŻNA ZABRAĆ ZWIERZAKA?',
+    description:
+      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
+    imageUrl: '/assets/FAQ/money.png',
+  },
+  {
+    header: 'CZY MOŻNA ZABRAĆ ZWIERZAKA?',
+    description:
+      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
+    imageUrl: '/assets/FAQ/cactus.png',
+  },
+];
+---
+
+<Container>
+  <h2>FAQ</h2>
+  <p id="faq-description">Mamy nadzieję, że tutaj rozwiejemy Twoje wątpliwości.</p>
+  {
+    sections.map(({ header, description, imageUrl }) => (
+      <div class="section">
+        <div class="section-content">
+          <div class="section-text">
+            <h3>{header}</h3>
+            <p>{description}</p>
+          </div>
+          <img src={imageUrl} />
+        </div>
+      </div>
+    ))
+  }
+</Container>
+
+<style>
+  #faq-description {
+    text-align: center;
+  }
+  .section {
+    border-bottom: 2px dashed #e4780c;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .section:first-of-type::after {
+    border-top: 2px dashed #e4780c;
+    border-top-right-radius: 0;
+  }
+
+  .section:nth-child(even) {
+    border-right: 2px dashed #e4780c;
+    border-bottom-left-radius: 0;
+  }
+
+  .section:nth-child(odd) {
+    border-left: 2px dashed #e4780c;
+    border-bottom-right-radius: 0;
+  }
+
+  .section-content {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .section:nth-child(even) .section-content {
+    flex-direction: row-reverse;
+  }
+
+  .section:nth-child(even) .section-text {
+    padding-left: 1rem;
+  }
+
+  p {
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+  }
+
+  h3 {
+    text-align: left;
+  }
+
+  .image {
+    max-width: 100%;
+    height: 100%;
+  }
+</style>

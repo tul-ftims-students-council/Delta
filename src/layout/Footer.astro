@@ -1,0 +1,149 @@
+---
+import OrangeContainer from 'components/shared/OrangeContainer.astro';
+---
+
+<OrangeContainer>
+  <div class="content-wrapper">
+    <div class="upper-wrapper">
+      <div class="logos-wrapper">
+        <img class="logo" src="/assets/logo_wrs.svg" alt="Logo WRS FTIMS" />
+        <img class="logo" src="/assets/logo_sspl.png" alt="Logo SSPŁ" />
+      </div>
+      <div class="social-wrapper">
+        <h3 class="social-header">Znajdź nas na social mediach:</h3>
+        <a class="social-row-wrapper" target="_blank" href="#">
+          <img class="social-logo" src="/assets/logo_facebook.png" alt="Logo Facebook" />
+          <p class="social-row-text">Delta Wyjazd Integracyjny Wydziału FTIMS PŁ</p>
+        </a>
+        <a class="social-row-wrapper" target="_blank" href="#">
+          <img class="social-logo" src="/assets/logo_instagram.png" alt="Logo Instagram" />
+          <p class="social-row-text">WRS WFTIMS PŁ</p>
+        </a>
+      </div>
+    </div>
+    <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
+  </div>
+</OrangeContainer>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .upper-wrapper {
+    align-self: stretch;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .logos-wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .logo {
+    width: auto;
+    height: 44px;
+  }
+
+  .social-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .social-header {
+    display: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .social-row-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  .social-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-row-text {
+    display: none;
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .copyright {
+    text-align: center;
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--white);
+  }
+
+  @media (min-width: 43rem) {
+    .logos-wrapper {
+      gap: 40px;
+    }
+
+    .logo {
+      height: 72px;
+    }
+
+    .social-wrapper {
+      flex-direction: column;
+    }
+
+    .social-header {
+      display: block;
+    }
+
+    .social-logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .social-row-text {
+      display: block;
+    }
+
+    .copyright {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .logos-wrapper {
+      gap: 60px;
+    }
+
+    .logo {
+      height: 100px;
+    }
+
+    .social-header {
+      font-size: 16px;
+    }
+
+    .social-row-text {
+      font-size: 16px;
+    }
+
+    .social-logo {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>
