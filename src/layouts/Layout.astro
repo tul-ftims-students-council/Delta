@@ -7,6 +7,7 @@ import routes from '../utils/routes';
 const { title } = Astro.props;
 import '../styles/lemonmilk.css';
 import Header from '../components/Header';
+import Footer from '../components/Footer.astro';
 ---
 
 <!DOCTYPE html>
@@ -24,11 +25,13 @@ import Header from '../components/Header';
   <body>
     <Header client:only="solid-js" activeRoute={routes.home} />
     <slot />
+    <Footer />
+
     <style>
       :root {
         --font-primary: 'Lemon Milk';
         --font-secondary: 'Inter';
-        
+
         --main-color: hsl(30, 90%, 47%);
         --main-color-hover: hsl(36, 100%, 61%);
         --main-color-active: hsl(30, 90%, 58%);
@@ -40,20 +43,18 @@ import Header from '../components/Header';
         --white: hsl(0, 0%, 100%);
         --gray-color-80: hsl(12, 75%, 11%, 8%);
         --gray-color-250: hsl(12, 75%, 11%, 25%);
-        
+
         --color-primary: #f49535;
-        --color-secondary: #d26414;
+        --color-secondary: #e4780c;
         --yellow: #ffb039;
         --orange: #e4780c;
         --orange2: #f49535;
         --brown: #300f07;
 
         --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-        /* --font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
-        --font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem); */
 
         --color-text: hsl(12, 5%, 4%);
-        --color-bg: hsl(10, 21%, 95%);
+        --color-bg: #fbfbfb;
         --color-border: hsl(17, 24%, 90%);
         --white: hsl(0, 0%, 100%);
 
