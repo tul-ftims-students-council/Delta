@@ -14,7 +14,7 @@ import SectionSubtitle from './SectionSubtitle.astro';
         <SectionSubtitle textAlign="center">Wypełnij formularz i bądź na bieżąco!</SectionSubtitle>
       </div>
       <Button type="link" href="#">Zarejestruj się</Button>
-      <div class="text-wrapper flex-column">
+      <div class="text-wrapper flex-column hide">
         <RegularText color="white" textAlign="center">Masz więcej pytań?</RegularText>
         <RegularText color="white" textAlign="center">Napisz do nas na adres delta.ftims@samorzad.p.lodz.pl</RegularText
         >
@@ -27,14 +27,15 @@ import SectionSubtitle from './SectionSubtitle.astro';
   .wrapper {
     align-self: stretch;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background-image: url('../../assets/banner_cta.svg');
-    padding: 120px 60px;
+    justify-content: center;
+    background-image: url('../../assets/banner_cta_mobile.svg');
+    margin: 0 var(--padding-side);
+    padding: 24px;
+    height: 250px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 40px;
+    border-radius: 15px;
   }
   .flex-column {
     display: flex;
@@ -43,15 +44,40 @@ import SectionSubtitle from './SectionSubtitle.astro';
   }
 
   .content {
+    justify-content: space-between;
     gap: 32px;
   }
 
   .text-wrapper {
     gap: 4px;
   }
+
+  .hide {
+    display: none;
+  }
+
   @media (min-width: 43rem) {
+    .wrapper {
+      background-image: url('../../assets/banner_cta.svg');
+      justify-content: flex-end;
+      padding: 80px 30px;
+      height: auto;
+      border-radius: 25px;
+    }
+
+    .content {
+      justify-content: normal;
+    }
+
+    .hide {
+      display: block;
+    }
   }
 
   @media (min-width: 62rem) {
+    .wrapper {
+      padding: 120px 60px;
+      border-radius: 40px;
+    }
   }
 </style>
