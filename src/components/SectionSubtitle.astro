@@ -1,12 +1,13 @@
 ---
 interface Props {
   textAlign?: 'center' | 'start';
+  color?: 'brown' | 'white';
 }
 
-const { textAlign = 'start' } = Astro.props;
+const { textAlign = 'start', color = 'white' } = Astro.props;
 ---
 
-<h2 class={`subtitle ${textAlign}`}>
+<h2 class={`subtitle ${textAlign} ${color}`}>
   <slot />
 </h2>
 
@@ -16,7 +17,6 @@ const { textAlign = 'start' } = Astro.props;
     font-family: var(--font-secondary);
     font-size: 12px;
     font-weight: 400;
-    color: var(--white);
   }
 
   .subtitle.start {
@@ -27,6 +27,12 @@ const { textAlign = 'start' } = Astro.props;
     text-align: center;
   }
 
+  .subtitle.white {
+    color: var(--white);
+  }
+  .subtitle.brown {
+    color: var(--brown);
+  }
   @media (min-width: 43rem) {
     .subtitle {
       font-size: 16px;
