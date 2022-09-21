@@ -58,8 +58,8 @@ import Gallery from '../components/Gallery.astro';
         </div>
       </div>
     </div>
+    <Gallery />
   </main>
-  <Gallery />
   <Footer />
 </Layout>
 
@@ -98,12 +98,11 @@ import Gallery from '../components/Gallery.astro';
   }
 
   main {
-    height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 100px;
+    padding-bottom: 150px;
   }
 
   .logo {

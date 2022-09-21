@@ -71,7 +71,7 @@
   background-color: hsla(0, 0%, 0%, 0.3);
   border: none;
   border-radius: 100px;
-  font-family: var(--font-family-inter);
+  font-family: var(--font-secondary);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.05em;
