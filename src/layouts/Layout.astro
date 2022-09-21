@@ -66,6 +66,10 @@ import '../styles/lemonmilk.css';
       body {
         margin: 0;
       }
+
+      body.prevent-scroll {
+        overflow: hidden;
+      }
     </style>
 
     <style is:global>
@@ -85,7 +89,6 @@ import '../styles/lemonmilk.css';
       h2,
       h3 {
         margin: var(--margin-top) 0 0;
-        text-align: center;
       }
 
       .icon {

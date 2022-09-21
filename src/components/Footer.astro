@@ -1,6 +1,10 @@
-<footer class="footer-wrapper">
-  <div class="footer-container">
-    <div class="content-wrapper">
+---
+import OrangeContainer from './OrangeContainer.astro';
+---
+
+<OrangeContainer>
+  <div class="content-wrapper">
+    <div class="upper-wrapper">
       <div class="logos-wrapper">
         <img class="logo" src="/assets/logo_wrs.svg" alt="Logo WRS FTIMS" />
         <img class="logo" src="/assets/logo_sspl.png" alt="Logo SSPŁ" />
@@ -19,25 +23,17 @@
     </div>
     <p class="copyright">Copyright © 2022 WRS FTIMS. All rights reserved.</p>
   </div>
-</footer>
+</OrangeContainer>
 
 <style>
-  .footer-wrapper {
-    background-color: var(--color-secondary);
-    padding: 0 20px;
-  }
-
-  .footer-container {
+  .content-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    margin: 0 auto;
-    padding: 20px 0;
-    max-width: var(--container-max-width);
   }
 
-  .content-wrapper {
+  .upper-wrapper {
     align-self: stretch;
     display: flex;
     gap: 20px;
