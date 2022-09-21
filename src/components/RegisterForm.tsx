@@ -45,7 +45,12 @@ const schema = z.object({
   //       .min(1, { message: 'To pole nie może być puste' }),
   //   })
   //   .refine((data) => data.email === data.confirmEmail, { message: 'Podane adresy email różnią się od siebie' }),
-  phoneNumber: z.string(),
+  phoneNumber: z
+    .number({
+      required_error: 'To pole jest wymagane',
+    })
+    .min(111111111, { message: 'Niepoprawny numer telefonu' })
+    .max(999999999, { message: 'Niepoprawny numer telefonu' }),
   rodo: z.literal(true),
   regulamin: z.literal(true),
 });
@@ -84,20 +89,13 @@ const RegisterForm: Component = () => {
               <Input name="email" label="Email" placeholder="przykladowy@email.com"></Input>
               <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
             </Row>
-            <Row>
+            {/* <Row>
               <Input name="emailForm.email" label="Email" placeholder="przykladowy@email.com"></Input>
               <Input name="emailForm.confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
-            </Row>
+            </Row> */}
             <Row>
-              <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420"></Input>
+              <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420" type="number"></Input>
             </Row>
-            {/* <CheckboxContainer>
-              <Checkbox />
-              <span>
-                Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny{' '}
-                <a>pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.
-              </span>
-            </CheckboxContainer> */}
             <CustomCheckbox
               id="regulamin"
               label={REGULAMIN}
@@ -120,7 +118,6 @@ const RegisterForm: Component = () => {
               onClick={() => {
                 console.log(data());
                 console.log(errors());
-
                 validate();
               }}
             >
@@ -138,12 +135,26 @@ const MainContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 80vw;
-  margin-top: 5vh;
+  /* margin-top: 2vh; */
+
+  @media (max-width: 1200px) {
+    width: 90vw;
+    justify-content: center;
+  }
+
+  @media (max-width: 722px) {
+    margin-top: 20px;
+  }
 
   & > img {
     width: 400px;
     height: 100%;
     object-fit: cover;
+    margin-right: 20px;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 `;
 
@@ -151,44 +162,25 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
+
+  @media (max-width: 722px) {
+    flex-direction: column;
+  }
 `;
 
 const ErrorMessage = styled.span`
   color: red;
   font-family: Inter;
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 10px;
-  min-height: 12px;
+  min-height: 16px;
   font-weight: 300;
-  display: block;
-`;
-
-const CheckboxContainer = styled.div`
   display: flex;
-  align-items: flex-start;
-  margin-top: 20px;
+  justify-content: flex-start;
 
-  & > span {
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 8px;
-    line-height: 12px;
-    width: 90%;
-    color: #300f07;
-    & > a {
-      color: #e4780c;
-      text-decoration: none;
-    }
+  @media (max-width: 722px) {
+    justify-content: center;
   }
-`;
-const Checkbox = styled.div`
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  border-radius: 6px;
-  border: 1px solid rgba(48, 15, 7, 0.25);
-  margin-right: 20px;
 `;
 
 const Container = styled.section`
@@ -202,12 +194,21 @@ const Register = styled.div`
   text-transform: uppercase;
   font-size: 40px;
   font-weight: 700;
+
+  @media (max-width: 722px) {
+    font-size: 20px;
+  }
 `;
 
 const RegisterSubtitle = styled.p`
   font-size: 20px;
   font-weight: 300px;
   font-family: Inter;
+  max-width: 60vw;
+
+  @media (max-width: 722px) {
+    font-size: 12px;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -217,27 +218,18 @@ const FormWrapper = styled.div`
   padding: 50px 70px;
   width: 35vw;
 
-  & > form {
-    & > input {
-      font-size: 14px;
-      font-family: Inter;
-      font-weight: 600;
-      line-height: 40px;
-      border-radius: 10px;
-      padding: 0px 14px;
-      background: #ffffff;
-      border: 1px solid rgba(48, 15, 7, 0.25);
-      border-radius: 10px;
-      color: #300f07;
-    }
+  @media (max-width: 1200px) {
+    width: 60vw;
+  }
 
-    & > label {
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 28px;
-      color: #300f07;
-      text-transform: uppercase;
-    }
+  @media (max-width: 800px) {
+    padding: 40px 50px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 722px) {
+    padding: 20px 30px;
+    width: 70vw;
   }
 `;
 

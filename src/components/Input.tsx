@@ -8,14 +8,12 @@ interface InputProps {
   placeholder?: string;
 }
 
-export default function Input(props: InputProps) {
+export default function Input({ name, type = 'text', label, placeholder }: InputProps) {
   return (
     <InputWrapper>
-      <label for={props.name}>{props.label}</label>
-      <input type="text" name={props.name} placeholder={props.placeholder}></input>
-      <ValidationMessage for={props.name}>
-        {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
-      </ValidationMessage>
+      <label for={name}>{label}</label>
+      <input type={type} name={name} placeholder={placeholder}></input>
+      <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
     </InputWrapper>
   );
 }
@@ -35,6 +33,13 @@ const InputWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
 
+  /* Chrome, Safari, Edge, Opera */
+  & > input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   & > input {
     font-size: 14px;
     font-family: Inter;
@@ -43,14 +48,36 @@ const InputWrapper = styled.div`
     border-radius: 10px;
     padding: 0px 14px;
     background: #ffffff;
-    border: 1px solid rgba(48, 15, 7, 0.25);
+    border: 2px solid rgba(48, 15, 7, 0.25);
     border-radius: 10px;
-    color: #300f07;
+    color: #e4780c;
     width: 14vw;
+    min-width: 170px;
+
+    @media (max-width: 1200px) {
+      width: 22vw;
+      justify-content: center;
+    }
+
+    @media (max-width: 722px) {
+      width: calc(70vw - 32px);
+      font-size: 12px;
+    }
+    /* Firefox */
+    -moz-appearance: textfield;
 
     &::placeholder {
       font-size: 14px;
       color: rgba(48, 15, 7, 0.25);
+
+      @media (max-width: 722px) {
+        font-size: 12px;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid #e4780c;
     }
   }
 
