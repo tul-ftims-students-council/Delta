@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { styled } from 'solid-styled-components';
-import routes from '../utils/routes';
+import routes from 'utils/routes';
 
 interface Props {
   activeRoute: typeof routes[keyof typeof routes];

@@ -2,12 +2,13 @@
 export interface Props {
   title: string;
 }
+const { title } = Astro.props;
 
 import routes from '../utils/routes';
-const { title } = Astro.props;
-import '../styles/lemonmilk.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer.astro';
+
+import 'styles/lemonmilk.css';
+import Header from './Header';
+import Footer from './Footer.astro';
 ---
 
 <!DOCTYPE html>
