@@ -35,16 +35,18 @@ const schema = z.object({
     .string()
     .email({ message: 'Niepoprawny adres email' })
     .min(1, { message: 'To pole nie może być puste' }),
-  // Nie działa - nie wyświetla poprawnie błędu
-  // emailForm: z
-  //   .object({
-  //     email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
-  //     confirmEmail: z
-  //       .string()
-  //       .email({ message: 'Niepoprawny adres email' })
-  //       .min(1, { message: 'To pole nie może być puste' }),
-  //   })
-  //   .refine((data) => data.email === data.confirmEmail, { message: 'Podane adresy email różnią się od siebie' }),
+  emailForm: z
+    .object({
+      email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
+      confirmEmail: z
+        .string()
+        .email({ message: 'Niepoprawny adres email' })
+        .min(1, { message: 'To pole nie może być puste' }),
+    })
+    .refine((data) => data.email === data.confirmEmail, {
+      message: 'Podane adresy email różnią się od siebie',
+      path: ['confirmEmail'],
+    }),
   phoneNumber: z
     .number({
       required_error: 'To pole jest wymagane',
@@ -86,13 +88,9 @@ const RegisterForm: Component = () => {
               <Input name="surname" label="Nazwisko" placeholder="Kowalski"></Input>
             </Row>
             <Row>
-              <Input name="email" label="Email" placeholder="przykladowy@email.com"></Input>
-              <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
-            </Row>
-            {/* <Row>
               <Input name="emailForm.email" label="Email" placeholder="przykladowy@email.com"></Input>
               <Input name="emailForm.confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
-            </Row> */}
+            </Row>
             <Row>
               <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420" type="number"></Input>
             </Row>
@@ -135,7 +133,7 @@ const MainContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 80vw;
-  /* margin-top: 2vh; */
+  margin-top: 5vh;
 
   @media (max-width: 1200px) {
     width: 90vw;
@@ -165,6 +163,7 @@ const Row = styled.div`
 
   @media (max-width: 722px) {
     flex-direction: column;
+    margin-bottom: 0;
   }
 `;
 
