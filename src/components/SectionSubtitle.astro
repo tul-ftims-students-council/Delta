@@ -1,0 +1,41 @@
+---
+interface Props {
+  textAlign?: 'center' | 'start';
+}
+
+const { textAlign = 'start' } = Astro.props;
+---
+
+<h2 class={`subtitle ${textAlign}`}>
+  <slot />
+</h2>
+
+<style>
+  .subtitle {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--white);
+  }
+
+  .subtitle.start {
+    text-align: start;
+  }
+
+  .subtitle.center {
+    text-align: center;
+  }
+
+  @media (min-width: 43rem) {
+    .subtitle {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .subtitle {
+      font-size: 20px;
+    }
+  }
+</style>

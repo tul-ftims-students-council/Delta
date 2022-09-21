@@ -1,0 +1,17 @@
+---
+import Container from './Container.astro';
+---
+
+<div class="wrapper">
+  <Container>
+    <slot />
+  </Container>
+</div>
+
+<style>
+  .wrapper {
+    align-self: stretch;
+    background-color: var(--color-secondary);
+    padding: 0 var(--padding-side);
+  }
+</style>
