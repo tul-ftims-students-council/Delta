@@ -1,4 +1,8 @@
-<div class="container">
+---
+import Container from 'components/shared/Container.astro';
+---
+
+<Container>
   <h2>PARTNERZY STRATEGICZNI</h2>
   <p>Poznaj firmy bez których wyjazd nie byłby możliwy!</p>
   <div class="logos">
@@ -13,16 +17,9 @@
     <img src="/assets/partners/RydwanyMiasta.png" height="80" width="106" />
     <img src="/assets/partners/Finestra.png" height="50" width="248" />
   </div>
-</div>
+</Container>
 
 <style>
-  .container {
-    position: center;
-    width: 1200px;
-    height: 520px;
-    margin: auto;
-  }
-
   h2 {
     font-size: 40px;
     padding-top: 40px;
