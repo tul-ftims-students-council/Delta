@@ -1,5 +1,5 @@
 import { createEffect, createSignal } from 'solid-js';
-import styles from '../styles/GalleryImage.module.css';
+import styles from 'styles/GalleryImage.module.css';
 
 interface GalleryImageProps {
   src: string;

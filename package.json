@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "astro": "^1.1.5",
-    "dayjs": "^1.11.5"
+    "dayjs": "^1.11.5",
+    "solid-styled-components": "^0.28.4"
   },
   "devDependencies": {
     "@astrojs/solid-js": "^1.1.0",
