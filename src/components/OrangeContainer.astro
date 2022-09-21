@@ -1,7 +1,11 @@
+---
+import Container from './Container.astro';
+---
+
 <div class="wrapper">
-  <div class="container">
+  <Container>
     <slot />
-  </div>
+  </Container>
 </div>
 
 <style>
@@ -9,13 +13,5 @@
     align-self: stretch;
     background-color: var(--color-secondary);
     padding: 0 20px;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    padding: 20px 0;
-    max-width: var(--container-max-width);
   }
 </style>

@@ -1,3 +1,51 @@
-<div>
-  <h2>test</h2>
-</div>
+---
+import Button from './Button.astro';
+import Container from './Container.astro';
+import RegularText from './RegularText.astro';
+import SectionHeader from './SectionHeader.astro';
+import SectionSubtitle from './SectionSubtitle.astro';
+---
+
+<Container>
+  <div class="wrapper">
+    <div class="content flex-column">
+      <div class="text-wrapper flex-column">
+        <SectionHeader>Chętny na wyjazd?</SectionHeader>
+        <SectionSubtitle>Wypełnij formularz i bądź na bieżąco!</SectionSubtitle>
+      </div>
+      <Button type="link" href="#">Zarejestruj się</Button>
+      <div class="text-wrapper flex-column">
+        <RegularText color="white">Masz więcej pytań?</RegularText>
+        <RegularText color="white">Napisz do nas na adres delta.ftims@samorzad.p.lodz.pl</RegularText>
+      </div>
+    </div>
+  </div>
+</Container>
+
+<style>
+  .wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-image: url('../../assets/banner_cta.svg');
+    padding: 150px 45px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 40px;
+  }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    gap: 24px;
+  }
+
+  .text-wrapper {
+    gap: 4px;
+  }
+</style>
