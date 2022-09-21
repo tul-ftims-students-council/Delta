@@ -1,12 +1,13 @@
 ---
 interface Props {
   color?: 'brown' | 'white';
+  textAlign?: 'center' | 'start';
 }
 
-const { color = 'brown' } = Astro.props;
+const { color = 'brown', textAlign = 'start' } = Astro.props;
 ---
 
-<p class={`regular ${color}`}>
+<p class={`regular ${color} ${textAlign}`}>
   <slot />
 </p>
 
@@ -24,6 +25,14 @@ const { color = 'brown' } = Astro.props;
   }
   .regular.brown {
     color: var(--brown);
+  }
+
+  .regular.start {
+    text-align: start;
+  }
+
+  .regular.center {
+    text-align: center;
   }
 
   @media (min-width: 43rem) {

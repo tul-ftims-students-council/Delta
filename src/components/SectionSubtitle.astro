@@ -1,4 +1,12 @@
-<h2 class="subtitle">
+---
+interface Props {
+  textAlign?: 'center' | 'start';
+}
+
+const { textAlign = 'start' } = Astro.props;
+---
+
+<h2 class={`subtitle ${textAlign}`}>
   <slot />
 </h2>
 
@@ -9,6 +17,14 @@
     font-size: 12px;
     font-weight: 400;
     color: var(--white);
+  }
+
+  .subtitle.start {
+    text-align: start;
+  }
+
+  .subtitle.center {
+    text-align: center;
   }
 
   @media (min-width: 43rem) {

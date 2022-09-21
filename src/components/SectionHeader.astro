@@ -1,4 +1,12 @@
-<h2 class="header">
+---
+interface Props {
+  textAlign?: 'center' | 'start';
+}
+
+const { textAlign = 'start' } = Astro.props;
+---
+
+<h2 class={`header ${textAlign}`}>
   <slot />
 </h2>
 
@@ -9,6 +17,14 @@
     font-weight: 700;
     color: var(--white);
     text-transform: uppercase;
+  }
+
+  .header.start {
+    text-align: start;
+  }
+
+  .header.center {
+    text-align: center;
   }
 
   @media (min-width: 43rem) {

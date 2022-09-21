@@ -10,13 +10,14 @@ import SectionSubtitle from './SectionSubtitle.astro';
   <div class="wrapper">
     <div class="content flex-column">
       <div class="text-wrapper flex-column">
-        <SectionHeader>Chętny na wyjazd?</SectionHeader>
-        <SectionSubtitle>Wypełnij formularz i bądź na bieżąco!</SectionSubtitle>
+        <SectionHeader textAlign="center">Chętny na wyjazd?</SectionHeader>
+        <SectionSubtitle textAlign="center">Wypełnij formularz i bądź na bieżąco!</SectionSubtitle>
       </div>
       <Button type="link" href="#">Zarejestruj się</Button>
       <div class="text-wrapper flex-column">
-        <RegularText color="white">Masz więcej pytań?</RegularText>
-        <RegularText color="white">Napisz do nas na adres delta.ftims@samorzad.p.lodz.pl</RegularText>
+        <RegularText color="white" textAlign="center">Masz więcej pytań?</RegularText>
+        <RegularText color="white" textAlign="center">Napisz do nas na adres delta.ftims@samorzad.p.lodz.pl</RegularText
+        >
       </div>
     </div>
   </div>
@@ -29,7 +30,7 @@ import SectionSubtitle from './SectionSubtitle.astro';
     flex-direction: column;
     align-items: flex-end;
     background-image: url('../../assets/banner_cta.svg');
-    padding: 150px 45px;
+    padding: 120px 60px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -42,10 +43,15 @@ import SectionSubtitle from './SectionSubtitle.astro';
   }
 
   .content {
-    gap: 24px;
+    gap: 32px;
   }
 
   .text-wrapper {
     gap: 4px;
+  }
+  @media (min-width: 43rem) {
+  }
+
+  @media (min-width: 62rem) {
   }
 </style>
