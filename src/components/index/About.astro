@@ -7,56 +7,55 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
 <Container>
   <div class="wrapper">
     <div class="flex-row content-row">
-      <div class="img-wrapper">
-        <img class="content-img" src="https://via.placeholder.com/580x550" alt="Uczestnicy" />
-      </div>
-      <div class="text-wrapper">
-        <div class="header-wrapper">
+      <img class="content-img" src="https://via.placeholder.com/550x550" alt="Uczestnicy" />
+      <div class="content-wrapper">
+        <div class="flex-column">
           <SectionHeader color="brown">O Delcie</SectionHeader>
           <RegularText fontSize="20">Co to? Dla kogo?</RegularText>
         </div>
 
-        <div class="top-container">
-          <RegularText fontSize="20"
-            ><span class="bold">Delta</span> to studencki wyjazd szkoleniowo-integracyjny organizowany przez <span
-              class="bold"
-              >Wydziałową Radę Samorządu Wydziału Fizyki Technicznej, Informatyki i Matematyki Stosowanej.</span
-            >
+        <RegularText fontSize="20">
+          <span class="bold">Delta</span>
+          to studencki wyjazd szkoleniowo-integracyjny organizowany przez
+          <span class="bold"
+            >Wydziałową Radę Samorządu Wydziału Fizyki Technicznej, Informatyki i Matematyki Stosowanej.</span
+          >
+        </RegularText>
+
+        <div class="flex-row cactus-row">
+          <RegularText fontSize="20">
+            W trakcie wyjazdu dbamy o
+            <span class="bold">integrację</span>
+            oraz rozwijamy swoje umiejętności podczas
+            <span class="bold">szkoleń.</span>
+            Nieważne, czy dopiero rozpoczynasz studia, czy po prostu chcesz poznać ludzi z kierunku...
+            <span class="bold">DELTA to idealny wyjazd dla każdego!</span>
           </RegularText>
-
-          <div class="flex-row cactus-row">
-            <div class="bottom-text">
-              <RegularText fontSize="20"
-                >W trakcie wyjazdu dbamy o <span class="bold">integrację</span> oraz rozwijamy swoje umiejętności podczas
-                <span class="bold">szkoleń.</span> Nieważne, czy dopiero rozpoczynasz studia, czy po prostu chcesz poznać
-                ludzi z kierunku...
-              </RegularText>
-              <RegularText fontSize="20"><span class="bold">DELTA to idealny wyjazd dla każdego!</span></RegularText>
-            </div>
-
-            <img class="cactus" src="../../assets/cactus.svg" />
-          </div>
+          <img class="cactus" src="../../assets/cactus.svg" />
         </div>
       </div>
     </div>
 
     <div class="flex-row content-row">
-      <div class="text-wrapper">
-        <div class="header-wrapper">
+      <div class="content-wrapper">
+        <div class="flex-column">
           <SectionHeader color="brown">Ośrodek</SectionHeader>
           <RegularText fontSize="20">Zobacz, gdzie pojedziemy tym razem.</RegularText>
         </div>
 
-        <RegularText fontSize="20"
-          ><span class="bold">Bądź czujny!</span> Tegoroczny motyw to Dziki Zachód, ale nasze rodeo spędzimy na południowym-wschodzie
-          Łodzi.
-          <span class="bold">Ośrodek Wypoczynkowy “Marysieńka”</span> znajduje się nad Zalewem Topornia. Ogrodzony teren
-          ośrodka mieści bar, stołówkę, świetlicę oraz parking. Każdy domek posiada <span class="bold">ogrzewanie,</span
-          > toaletę, TV, jak i <span class="bold">lodówkę.</span>
+        <RegularText fontSize="20">
+          <span class="bold">Bądź czujny!</span>
+          Tegoroczny motyw to Dziki Zachód, ale nasze rodeo spędzimy na południowym-wschodzie Łodzi.
+          <span class="bold">Ośrodek Wypoczynkowy “Marysieńka”</span>
+          znajduje się nad Zalewem Topornia. Ogrodzony teren ośrodka mieści bar, stołówkę, świetlicę oraz parking. Każdy
+          domek posiada
+          <span class="bold">ogrzewanie,</span>
+          toaletę, TV, jak i
+          <span class="bold">lodówkę.</span>
         </RegularText>
 
         <div class="flex-row cactus-row">
-          <div class="info-box">
+          <div class="flex-column info-box">
             <h4 class="info-header">Szczegółowe informacje:</h4>
             <p class="info-text">Ośrodek Wypoczynkowy „Marysieńka” Topornia 23, 26-400 Przysucha</p>
           </div>
@@ -64,9 +63,7 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
         </div>
       </div>
 
-      <div class="img-wrapper">
-        <img class="content-img" src="https://via.placeholder.com/580x550" alt="Ośrodek" />
-      </div>
+      <img class="content-img" src="https://via.placeholder.com/550x550" alt="Ośrodek" />
     </div>
   </div>
 </Container>
@@ -75,41 +72,34 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   .wrapper {
     display: flex;
     flex-direction: column;
-    gap: 122px;
+    gap: 112px;
     margin: 0 var(--padding-side);
   }
 
   .flex-row {
     display: flex;
+    align-items: center;
   }
 
   .content-row {
-    width: 1200px; /* nie umiem tego zrobić inaczej niż na sztywno */
     gap: 40px;
   }
 
-  .top-container {
+  .flex-column {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-  }
-
-  .bottom-text {
-    display: block;
-    max-width: 430px;
-  }
-
-  .text-wrapper {
-    max-width: 550px;
-    padding: 50px 0;
-  }
-
-  .header-wrapper {
-    padding-bottom: 20px;
   }
 
   .content-img {
+    aspect-ratio: 1 / 1;
+    max-width: 550px;
     border-radius: 20px;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   .bold {
@@ -118,14 +108,13 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
 
   .cactus-row {
     justify-content: space-between;
+    gap: 20px;
   }
 
   .info-box {
+    gap: 8px;
     color: var(--brown);
-    margin-top: 50px;
     padding: 10px;
-    max-width: 395px;
-    max-height: 120px;
     box-shadow: 0px 6px 12px rgba(29, 10, 6, 0.08);
     border-radius: 10px;
   }
@@ -133,19 +122,19 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   .info-header {
     text-transform: uppercase;
     margin: 0;
-    padding-top: 2px;
   }
 
   .info-text {
+    margin: 0;
     font-family: var(--font-secondary);
     font-weight: 600;
     font-size: 20px;
     line-height: 32px;
-    margin-top: 8px;
   }
 
   .cactus {
-    max-height: 180px;
-    align-self: center;
+    flex-shrink: 0;
+    display: block;
+    width: 100px;
   }
 </style>
