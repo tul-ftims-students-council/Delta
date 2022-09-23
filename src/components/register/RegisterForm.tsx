@@ -1,11 +1,12 @@
-import { createForm } from '@felte/solid';
-import { Component, createSignal } from 'solid-js';
-import { validator } from '@felte/validator-zod';
-import { reporter } from '@felte/reporter-solid';
 import { z } from 'zod';
 import { styled } from 'solid-styled-components';
+
+import { createForm } from '@felte/solid';
+import { Component, createSignal, ParentProps } from 'solid-js';
+import { validator } from '@felte/validator-zod';
+import { reporter } from '@felte/reporter-solid';
+
 import Input from './Input.jsx';
-import Cowboy from '/assets/cowboy.png';
 import CustomCheckbox from './CutomCheckbox.jsx';
 
 const REGULAMIN = `Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny <a>pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.`;
@@ -21,52 +22,53 @@ zgadzam się na otrzymywanie wiadomości tekstowych dotyczących spraw organizac
 na adres e-mail (i numer telefonu) podany w formularzu. Klauzula RODO dostępna jest
 <a href="#">tutaj</a>.`;
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
-    .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
-  surname: z
-    .string()
-    .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
-    .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
-  email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
-  confirmEmail: z
-    .string()
-    .email({ message: 'Niepoprawny adres email' })
-    .min(1, { message: 'To pole nie może być puste' }),
-  emailForm: z
-    .object({
-      email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
-      confirmEmail: z
-        .string()
-        .email({ message: 'Niepoprawny adres email' })
-        .min(1, { message: 'To pole nie może być puste' }),
-    })
-    .refine((data) => data.email === data.confirmEmail, {
-      message: 'Podane adresy email różnią się od siebie',
-      path: ['confirmEmail'],
-    }),
-  phoneNumber: z
-    .number({
-      required_error: 'To pole jest wymagane',
-    })
-    .min(111111111, { message: 'Niepoprawny numer telefonu' })
-    .max(999999999, { message: 'Niepoprawny numer telefonu' }),
-  rodo: z.literal(true),
-  regulamin: z.literal(true),
-});
+const schema = z
+  .object({
+    name: z
+      .string()
+      .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
+      .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
+    surname: z
+      .string()
+      .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
+      .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
+    email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
+    confirmEmail: z
+      .string()
+      .email({ message: 'Niepoprawny adres email' })
+      .min(1, { message: 'To pole nie może być puste' }),
+    phoneNumber: z
+      .number({
+        required_error: 'To pole jest wymagane',
+      })
+      .min(111111111, { message: 'Niepoprawny numer telefonu' })
+      .max(999999999, { message: 'Niepoprawny numer telefonu' }),
+    rodo: z.literal(true),
+    regulamin: z.literal(true),
+  })
+  .refine((data) => data.email === data.confirmEmail, {
+    message: 'Podane adresy email różnią się od siebie',
+    path: ['confirmEmail'],
+  });
 
 type FormSchema = z.infer<typeof schema>;
 
-const RegisterForm: Component = () => {
+const RegisterForm: Component<ParentProps> = ({ children }) => {
   const [isAgreementClicked, setIsAgreementClicked] = createSignal(false);
   const [isRodoClicked, setIsRodoClicked] = createSignal(false);
 
-  const { form, validate, data, errors } = createForm<FormSchema>({
+  const { form, errors } = createForm<FormSchema>({
     extend: [validator({ schema }), reporter()],
-    onSubmit: (values) => {
-      console.log({ values });
+    onSubmit: async ({ name, surname, email, phoneNumber }) => {
+      const response = await fetch(`https://delta-deno-backend.fly.dev/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors',
+        body: JSON.stringify({ name, surname, email, phoneNumber }),
+      }).catch((e) => console.log(e));
+      console.log(response);
     },
     onError(err, context) {
       console.log('Error', { err }, { context });
@@ -75,12 +77,13 @@ const RegisterForm: Component = () => {
       console.log('Success', { err }, { context });
     },
   });
+
   return (
     <Container>
       <Register>Rejestracja</Register>
       <RegisterSubtitle>Wypełnij formularz i dostań informację o starcie płatności.</RegisterSubtitle>
       <MainContent>
-        <img src={Cowboy} alt="Cowboy on a horse" />
+        <img src="/assets/cowboy.png" alt="Cowboy on a horse" />
         <FormWrapper>
           <form use:form>
             <Row>
@@ -88,8 +91,8 @@ const RegisterForm: Component = () => {
               <Input name="surname" label="Nazwisko" placeholder="Kowalski"></Input>
             </Row>
             <Row>
-              <Input name="emailForm.email" label="Email" placeholder="przykladowy@email.com"></Input>
-              <Input name="emailForm.confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
+              <Input name="email" label="Email" placeholder="przykladowy@email.com"></Input>
+              <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
             </Row>
             <Row>
               <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420" type="number"></Input>
@@ -106,21 +109,10 @@ const RegisterForm: Component = () => {
               isChecked={isAgreementClicked()}
               setIsChecked={setIsAgreementClicked}
             />
-
             {!!errors().rodo || !!errors().regulamin ? (
               <ErrorMessage>Musisz zaakceptować powyższe zgody</ErrorMessage>
             ) : null}
-
-            <button
-              type="submit"
-              onClick={() => {
-                console.log(data());
-                console.log(errors());
-                validate();
-              }}
-            >
-              submit
-            </button>
+            <div style={{ 'margin-top': '1rem' }}>{children}</div>
           </form>
         </FormWrapper>
       </MainContent>
@@ -183,7 +175,6 @@ const ErrorMessage = styled.span`
 `;
 
 const Container = styled.section`
-  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,7 +206,7 @@ const FormWrapper = styled.div`
   box-shadow: 0px 6px 12px rgba(29, 10, 6, 0.08);
   border-radius: 40px;
   padding: 50px 70px;
-  width: 35vw;
+  width: 50%;
 
   @media (max-width: 1200px) {
     width: 60vw;

@@ -1,12 +1,12 @@
-import { createSignal } from 'solid-js';
+import { createSignal, ParentProps } from 'solid-js';
 import { styled } from 'solid-styled-components';
 import routes from 'utils/routes';
 
-interface Props {
+interface Props extends ParentProps {
   activeRoute: typeof routes[keyof typeof routes];
 }
 
-const Header = ({ activeRoute }: Props) => {
+const Header = ({ activeRoute, children }: Props) => {
   const [menuOpen, setMenuOpen] = createSignal(false);
 
   return (
@@ -35,6 +35,7 @@ const Header = ({ activeRoute }: Props) => {
               />
             </Hamburger>
           </div>
+          {children}
         </div>
       </div>
     </HeaderWrapper>
