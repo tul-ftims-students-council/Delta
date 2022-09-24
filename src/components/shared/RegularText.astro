@@ -17,7 +17,7 @@ const { color = 'brown', textAlign = 'start', fontSize = '18' } = Astro.props;
     margin: 0;
     font-family: var(--font-secondary);
     font-weight: 400;
-    line-height: 32px;
+    line-height: 24px;
     color: var(--white);
   }
 
@@ -45,6 +45,10 @@ const { color = 'brown', textAlign = 'start', fontSize = '18' } = Astro.props;
   }
 
   @media (min-width: 43rem) {
+    .regular {
+      line-height: 28px;
+    }
+
     .regular.18 {
       font-size: 14px;
     }
@@ -54,6 +58,10 @@ const { color = 'brown', textAlign = 'start', fontSize = '18' } = Astro.props;
   }
 
   @media (min-width: 62rem) {
+    .regular {
+      line-height: 32px;
+    }
+
     .regular.18 {
       font-size: 18px;
     }

@@ -7,13 +7,18 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
 <Container>
   <div class="wrapper">
     <div class="flex-row content-row">
-      <img class="content-img" src="https://via.placeholder.com/550x550" alt="Uczestnicy" />
-      <div class="content-wrapper">
+      <div class="img-wrapper">
+        <img class="content-img" src="https://via.placeholder.com/550x550" alt="Uczestnicy" />
         <div class="flex-column">
           <SectionHeader color="brown">O Delcie</SectionHeader>
           <RegularText fontSize="20">Co to? Dla kogo?</RegularText>
         </div>
-
+      </div>
+      <div class="content-wrapper">
+        <div class="flex-column desktop-text">
+          <SectionHeader color="brown">O Delcie</SectionHeader>
+          <RegularText fontSize="20">Co to? Dla kogo?</RegularText>
+        </div>
         <RegularText fontSize="20">
           <span class="bold">Delta</span>
           to studencki wyjazd szkoleniowo-integracyjny organizowany przez
@@ -21,7 +26,6 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
             >Wydziałową Radę Samorządu Wydziału Fizyki Technicznej, Informatyki i Matematyki Stosowanej.</span
           >
         </RegularText>
-
         <div class="flex-row cactus-row">
           <RegularText fontSize="20">
             W trakcie wyjazdu dbamy o
@@ -35,14 +39,19 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
         </div>
       </div>
     </div>
-
-    <div class="flex-row content-row">
-      <div class="content-wrapper">
+    <div class="flex-row bottom-content content-row">
+      <div class="img-wrapper row-reverse">
+        <img class="content-img" src="https://via.placeholder.com/550x550" alt="Ośrodek" />
         <div class="flex-column">
           <SectionHeader color="brown">Ośrodek</SectionHeader>
           <RegularText fontSize="20">Zobacz, gdzie pojedziemy tym razem.</RegularText>
         </div>
-
+      </div>
+      <div class="content-wrapper">
+        <div class="flex-column desktop-text">
+          <SectionHeader color="brown">Ośrodek</SectionHeader>
+          <RegularText fontSize="20">Zobacz, gdzie pojedziemy tym razem.</RegularText>
+        </div>
         <RegularText fontSize="20">
           <span class="bold">Bądź czujny!</span>
           Tegoroczny motyw to Dziki Zachód, ale nasze rodeo spędzimy na południowym-wschodzie Łodzi.
@@ -53,7 +62,6 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
           toaletę, TV, jak i
           <span class="bold">lodówkę.</span>
         </RegularText>
-
         <div class="flex-row cactus-row">
           <div class="flex-column info-box">
             <h4 class="info-header">Szczegółowe informacje:</h4>
@@ -62,7 +70,6 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
           <img class="cactus" src="../../assets/cactus.svg" />
         </div>
       </div>
-      <img class="content-img" src="https://via.placeholder.com/550x550" alt="Ośrodek" />
     </div>
   </div>
 </Container>
@@ -80,9 +87,21 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
     align-items: center;
   }
 
+  .row-reverse {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
   .content-row {
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
+  }
+
+  .img-wrapper {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .flex-column {
@@ -102,18 +121,21 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
     gap: 20px;
   }
 
+  .desktop-text {
+    display: none;
+  }
+
   .bold {
     font-weight: 700;
   }
 
   .cactus-row {
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
   }
 
   .info-box {
     gap: 8px;
-    margin-right: 40px;
     padding: 10px;
     box-shadow: 0px 6px 12px rgba(29, 10, 6, 0.08);
     border-radius: 10px;
@@ -121,16 +143,18 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   }
 
   .info-header {
-    text-transform: uppercase;
     margin: 0;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .info-text {
     margin: 0;
     font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 32px;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
   }
 
   .cactus {
@@ -138,26 +162,65 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   }
 
   @media (min-width: 43rem) {
-    .content-wrapper {
-      background-color: red;
+    .content-row {
+      gap: 25px;
+    }
+
+    .img-wrapper {
+      gap: 30px;
     }
 
     .content-img {
       width: 220px;
     }
+
+    .info-header {
+      font-size: 16px;
+    }
+
+    .info-text {
+      font-size: 16px;
+    }
   }
 
   @media (min-width: 62rem) {
-    .content-wrapper {
-      background-color: blue;
-    }
-
     .content-row {
       flex-direction: row;
+      gap: 40px;
+    }
+
+    .img-wrapper > .flex-column {
+      display: none;
+    }
+
+    .bottom-content {
+      flex-direction: row-reverse;
+    }
+
+    .desktop-text {
+      display: block;
     }
 
     .content-img {
       width: 550px;
+    }
+
+    .cactus-row {
+      justify-content: space-between;
+    }
+
+    .info-box {
+      margin-right: 20px;
+    }
+
+    .info-header {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .info-text {
+      font-size: 18px;
+      text-align: left;
     }
 
     .cactus {
