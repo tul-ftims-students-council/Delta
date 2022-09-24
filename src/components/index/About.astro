@@ -62,7 +62,6 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
           <img class="cactus" src="../../assets/cactus.svg" />
         </div>
       </div>
-
       <img class="content-img" src="https://via.placeholder.com/550x550" alt="Ośrodek" />
     </div>
   </div>
@@ -82,6 +81,7 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   }
 
   .content-row {
+    flex-direction: column;
     gap: 40px;
   }
 
@@ -91,9 +91,9 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   }
 
   .content-img {
+    width: 120px;
     aspect-ratio: 1 / 1;
-    max-width: 550px;
-    border-radius: 20px;
+    border-radius: 16px;
   }
 
   .content-wrapper {
@@ -134,8 +134,36 @@ import SectionHeader from 'components/shared/SectionHeader.astro';
   }
 
   .cactus {
-    flex-shrink: 0;
-    display: block;
-    width: 100px;
+    display: none;
+  }
+
+  @media (min-width: 43rem) {
+    .content-wrapper {
+      background-color: red;
+    }
+
+    .content-img {
+      width: 220px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .content-wrapper {
+      background-color: blue;
+    }
+
+    .content-row {
+      flex-direction: row;
+    }
+
+    .content-img {
+      width: 550px;
+    }
+
+    .cactus {
+      flex-shrink: 0;
+      display: block;
+      width: 100px;
+    }
   }
 </style>
