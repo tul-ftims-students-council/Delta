@@ -38,11 +38,9 @@ const schema = z
       .email({ message: 'Niepoprawny adres email' })
       .min(1, { message: 'To pole nie może być puste' }),
     phoneNumber: z
-      .number({
-        required_error: 'To pole jest wymagane',
-      })
-      .min(111111111, { message: 'Niepoprawny numer telefonu' })
-      .max(999999999, { message: 'Niepoprawny numer telefonu' }),
+      .string()
+      .min(1, { message: 'To pole nie może być puste' })
+      .regex(/^\d{9}$/, { message: 'Niepoprawny numer telefonu' }),
     rodo: z.literal(true),
     regulamin: z.literal(true),
   })
@@ -56,27 +54,26 @@ type FormSchema = z.infer<typeof schema>;
 const RegisterForm: Component<ParentProps> = ({ children }) => {
   const [isAgreementClicked, setIsAgreementClicked] = createSignal(false);
   const [isRodoClicked, setIsRodoClicked] = createSignal(false);
+  const [message, setMessage] = createSignal('');
+  const [isSuccess, setIsSuccess] = createSignal(false);
 
   const { form, errors } = createForm<FormSchema>({
     extend: [validator({ schema }), reporter()],
     onSubmit: async ({ name, surname, email, phoneNumber }) => {
-      const response = await fetch(`https://delta-deno-backend.fly.dev/`, {
+      const response = await fetch(`https://delta-go.onrender.com/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        mode: 'no-cors',
         body: JSON.stringify({ name, surname, email, phoneNumber }),
-      }).catch((e) => console.log(e));
-      console.log(response);
-    },
-    onError(err, context) {
-      console.log('Error', { err }, { context });
-    },
-    onSuccess(err, context) {
-      console.log('Success', { err }, { context });
+      }).then((res) => res.json());
+
+      setIsSuccess(response.statusCode === 200);
+      setMessage(response.message);
     },
   });
+
+  const ServerMessage = isSuccess() ? SuccessMessage : ErrorMessage;
 
   return (
     <Container>
@@ -95,7 +92,7 @@ const RegisterForm: Component<ParentProps> = ({ children }) => {
               <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
             </Row>
             <Row>
-              <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420" type="number"></Input>
+              <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420"></Input>
             </Row>
             <CustomCheckbox
               id="regulamin"
@@ -112,7 +109,8 @@ const RegisterForm: Component<ParentProps> = ({ children }) => {
             {!!errors().rodo || !!errors().regulamin ? (
               <ErrorMessage>Musisz zaakceptować powyższe zgody</ErrorMessage>
             ) : null}
-            <div style={{ 'margin-top': '1rem' }}>{children}</div>
+            <SubmitButton>{children}</SubmitButton>
+            {message() ? <ServerMessage>{message()}</ServerMessage> : null}
           </form>
         </FormWrapper>
       </MainContent>
@@ -159,8 +157,7 @@ const Row = styled.div`
   }
 `;
 
-const ErrorMessage = styled.span`
-  color: red;
+const Message = styled.span`
   font-family: Inter;
   margin-top: 4px;
   font-size: 10px;
@@ -169,6 +166,22 @@ const ErrorMessage = styled.span`
   display: flex;
   justify-content: flex-start;
 
+  @media (max-width: 722px) {
+    justify-content: center;
+  }
+`;
+
+const ErrorMessage = styled(Message)`
+  color: red;
+`;
+
+const SuccessMessage = styled(Message)`
+  color: green;
+`;
+
+const SubmitButton = styled.div`
+  display: flex;
+  margin-top: 1rem;
   @media (max-width: 722px) {
     justify-content: center;
   }

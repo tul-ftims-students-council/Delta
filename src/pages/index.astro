@@ -1,5 +1,4 @@
 ---
-import RegisterForm from '../components/RegisterForm';
 import Layout from 'layout/Layout.astro';
 import Banner from 'components/index/banner/Banner.astro';
 import Partners from 'components/index/Partners.astro';
@@ -9,8 +8,6 @@ import CallToAction from 'components/index/CallToAction.astro';
 ---
 
 <Layout title="DELTA">
-  <RegisterForm client:only="solid-js"/>
-
   <main>
     <Banner />
     <Partners />
