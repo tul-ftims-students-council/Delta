@@ -51,8 +51,12 @@ const InputWrapper = styled.div`
     border: 2px solid rgba(48, 15, 7, 0.25);
     border-radius: 10px;
     color: #e4780c;
-    width: 14vw;
+    width: 15vw;
     min-width: 170px;
+
+    @media (max-width: 1500px) {
+      width: 16vw;
+    }
 
     @media (max-width: 1200px) {
       width: 22vw;
@@ -60,7 +64,7 @@ const InputWrapper = styled.div`
     }
 
     @media (max-width: 722px) {
-      width: calc(70vw - 32px);
+      width: 100%;
       font-size: 12px;
     }
     /* Firefox */

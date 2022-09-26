@@ -124,6 +124,7 @@ const MainContent = styled.div`
   align-items: center;
   width: 80vw;
   margin-top: 5vh;
+  margin-bottom: 35px;
 
   @media (max-width: 1200px) {
     width: 90vw;
@@ -132,6 +133,10 @@ const MainContent = styled.div`
 
   @media (max-width: 722px) {
     margin-top: 20px;
+  }
+
+  @media (max-width: 425px) {
+    margin-top: 10px;
   }
 
   & > img {
@@ -182,6 +187,7 @@ const SuccessMessage = styled(Message)`
 const SubmitButton = styled.div`
   display: flex;
   margin-top: 1rem;
+  justify-content: flex-end;
   @media (max-width: 722px) {
     justify-content: center;
   }
@@ -191,6 +197,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 425px) {
+    padding-top: 30px;
+  }
 `;
 
 const Register = styled.div`
@@ -221,6 +231,11 @@ const FormWrapper = styled.div`
   padding: 50px 70px;
   width: 50%;
 
+  @media (max-width: 1500px) {
+    width: 55%;
+    padding: 50px 60px;
+  }
+
   @media (max-width: 1200px) {
     width: 60vw;
   }
@@ -228,6 +243,7 @@ const FormWrapper = styled.div`
   @media (max-width: 800px) {
     padding: 40px 50px;
     border-radius: 10px;
+    width: 65vw;
   }
 
   @media (max-width: 722px) {
