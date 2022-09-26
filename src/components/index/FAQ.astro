@@ -3,104 +3,249 @@ import Container from 'components/shared/Container.astro';
 
 interface Section {
   header: string;
-  description: string;
+  description: string[] | string;
   imageUrl: string;
 }
 
 const sections: Section[] = [
   {
     header: 'CO MAM ZABRAĆ NA WYJAZD?',
-    description:
-      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
-    imageUrl: '/assets/FAQ/cactus.png',
+    description: [
+      `Dokument potwierdzający tożsamość uczestnika, np. dowód osobisty, paszport.`,
+      `Ważną legitymację studencką.`,
+      `Wypełnione oświadczenie obozowe zgodne ze stanem faktycznym.`,
+      `Niezbędną ilość leków, które uczestnik musi przyjmować, wraz z instrukcją ich podawania (dotyczy tylko osób przyjmujących leki na stałe – informacja musi znaleźć się w oświadczeniu!).`,
+      `Odzież przystosowaną do przewidywanej pogody.`,
+      `Przebrania na imprezy tematyczne, dobry humor i chęć do zabawy!`,
+    ],
+    imageUrl: '/assets/FAQ/hat.png',
   },
   {
-    header: 'CZY MOŻNA ZABRAĆ ZWIERZAKA?',
-    description:
-      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
+    header: 'KIEDY ODBĘDZIE SIĘ ODPRAWA OBOZOWA?',
+    description: `Odprawa obozowa planowana jest na czwartek 20 października 2022 r. o godzinie 13.00.
+      Wymagane jest posiadanie wypełnionego oświadczenia obozowego!
+      Uczestników informujemy, iż na odprawie obozowej mogą pojawić się władze Wydziału Fizyki Technicznej, Informatyki i Matematyki Stosowanej.
+      Osoby, które stawią się w miejscu zbiórki i odprawy w stanie wskazującym na spożycie alkoholu lub środków odurzających,
+      będą w trybie natychmiastowym wydalone z Wyjazdu jeszcze przed wyruszeniem z Łodzi bez możliwości ubiegania się o zwrot kosztów.
+      W trakcie trwania Delty 2022 przewidywana jest również wizytacja Władz Uczelni, Władz Wydziału oraz przedstawicieli Politechniki Łódzkiej.`,
+    imageUrl: '/assets/FAQ/tumbleweed.png',
+  },
+  {
+    header: 'CZY MOGĘ OTRZYMAĆ FAKTURĘ VAT ZA WYJAZD?',
+    description: `Uczestnicy którzy chcą otrzymać fakturę VAT za Wyjazd „Delta 2022”,
+      są zobowiązani zgłosić ten fakt podczas wypełniania formularza płatności oraz wysłać wiadomość mailową na adres p.kielek@samorzad.p.lodz.pl.
+      Wiadomość powinna zawierać wszelkie niezbędne dane do wystawienia faktury VAT (imię, nazwisko, numer NIP, adres odbiorcy faktury) oraz telefon kontaktowy.
+      Informujemy jednocześnie, iż faktury VAT wystawiane będą dopiero po zakończeniu Wyjazdu, tj. od dnia 23.10.2022 r.
+      Po odbiór faktury można zgłosić się do biura Wydziałowej Rady Samorządu przy ul. Wólczańskiej 219, budynek B14,
+      I piętro po wcześniejszym ustaleniu mailowym terminu odbioru faktury. Możliwe jest także otrzymanie faktury pocztą
+      (adres do przesłania faktury musi podany być w mailu dotyczącym otrzymania faktury). Czas oczekiwania na fakturę VAT może wynosić nawet do 30 dni roboczych.`,
     imageUrl: '/assets/FAQ/money.png',
   },
   {
-    header: 'CZY MOŻNA ZABRAĆ ZWIERZAKA?',
-    description:
-      'Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sitamet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.',
-    imageUrl: '/assets/FAQ/cactus.png',
+    header: 'CO W PRZYPADKU REZYGNACJI Z WYJAZDU?',
+    description: `Zgodnie z Regulaminem, w razie rezygnacji z uczestnictwa w wyjeździe do dnia 11.10.2022 r.
+      przysługuje Państwu zwrot całości wpłaconej kwoty. Rezygnacje w późniejszym terminie będą rozpatrywane indywidualnie,
+      w zależności od podanego powodu rezygnacji. Ta decyzja koniecznie musi być przekazana Organizatorowi drogą mailową na adres
+      delta.ftims@samorzad.p.lodz.pl i Głównemu Koordynatorowi na adres p.kielek@samorzad.p.lodz.pl.
+      Mail powinien zawierać: imię, nazwisko, nr telefonu kontaktowego, wszelkie dane związane z numerem konta bankowego,
+      na który ma przyjść przelew zwrotny (numer konta, nazwa właściciela konta) oraz ponownie załączone potwierdzenie wpłaty i powód rezygnacji.
+      W przypadku rezygnacji dopuszczalne jest również przekazanie swojego opłaconego miejsca innej osobie.
+      Procedura wykonywania zwrotów zostanie uruchomiona dnia 18.10.2022 r., a czas jej realizacji może wynosić nawet do 30 dni roboczych.`,
+    imageUrl: '/assets/FAQ/dynamite.png',
+  },
+  {
+    header: 'PRZESTRZEGANIE REGULAMINU!',
+    description: `Jeżeli osoba wchodząca w skład Kadry lub Koordynator Główny Delty będą podejrzewać zażywanie przez uczestnika Wyjazdu substancji zabronionych,
+      poinformują o tym odpowiednie służby interwencyjne. W razie potwierdzenia podejrzeń, Uczestnik taki zostaje wydalony dyscyplinarnie z Wyjazdu,
+      a Koordynator o całym zajściu poinformuje Władze Uczelni. Uczestnik, który dopuści się łamania któregokolwiek z punktów Regulaminu,
+      otrzymuje każdorazowo ostrzeżenie od Koordynatora Głównego Delty. Ostrzeżenie może być dane na uzasadnioną prośbę osób wskazanych jako Kadra,
+      przedstawicieli Uczelni lub innych uczestników Delty. Otrzymanie drugiego ostrzeżenia skutkuje również wydaleniem Uczestnika z Wyjazdu
+      bez możliwości roszczeń przez niego praw do zwrotu wpłaty za Wyjazd. Wydalenie Uczestnika z Wyjazdu wiąże się z samodzielnym powrotem Uczestnika do domu
+      (uczestnicy są pełnoletni, a organizator nie sprawuje pieczy nad Uczestnikiem) oraz powiadomieniem Władz Uczelni o zaistniałej sytuacji.`,
+    imageUrl: '/assets/FAQ/gun.png',
   },
 ];
 ---
 
 <Container>
-  <h2>FAQ</h2>
-  <p id="faq-description">Mamy nadzieję, że tutaj rozwiejemy Twoje wątpliwości.</p>
-  {
-    sections.map(({ header, description, imageUrl }) => (
-      <div class="section">
-        <div class="section-content">
-          <div class="section-text">
-            <h3>{header}</h3>
-            <p>{description}</p>
+  <div class="faq-text-block">
+    <h2 id="faq-title">FAQ</h2>
+    <p id="faq-description">Mamy nadzieję, że tutaj rozwiejemy Twoje wątpliwości.</p>
+  </div>
+  <div class="faq-content-wrapper">
+    {
+      sections.map(({ header, description, imageUrl }) => (
+        <div class="section">
+          <div class="section-content">
+            <div>
+              <h3>{header}</h3>
+              {Array.isArray(description) ? (
+                <ul>
+                  {description.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{description}</p>
+              )}
+            </div>
+            <div class="section-icon">
+              <img class="image" src={imageUrl} />
+            </div>
           </div>
-          <img src={imageUrl} />
         </div>
-      </div>
-    ))
-  }
+      ))
+    }
+    <img id="cross-icon" src="/assets/FAQ/cross.png" />
+  </div>
 </Container>
 
 <style>
-  #faq-description {
-    text-align: center;
-  }
-  .section {
-    border-bottom: 2px dashed #e4780c;
-    border-radius: 16px;
+  .faq-content-wrapper {
+    position: relative;
+    margin: 0 var(--padding-side);
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    align-items: center;
+    color: #300f07;
+  }
+
+  .faq-text-block {
+    margin: 0 var(--padding-side);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #300f07;
+    margin-bottom: 20px;
+  }
+  #faq-title {
+    font-size: 40px;
+    font-weight: 700;
+  }
+  #faq-description {
     font-size: 20px;
+    text-align: center;
   }
 
-  .section:first-of-type::after {
-    border-top: 2px dashed #e4780c;
-    border-top-right-radius: 0;
+  .faq-content-wrapper .section:first-of-type {
+    list-style-type: circle;
   }
 
-  .section:nth-child(even) {
-    border-right: 2px dashed #e4780c;
-    border-bottom-left-radius: 0;
+  .section {
+    display: flex;
+    position: relative;
+    font-size: 20px;
+    border-bottom: none;
   }
 
-  .section:nth-child(odd) {
-    border-left: 2px dashed #e4780c;
-    border-bottom-right-radius: 0;
+  .section::before,
+  .section::after {
+    position: absolute;
+    top: -2px;
+    width: 60px;
+    height: 100%;
+    border: 2px dashed #e4780c;
+  }
+
+  .section:nth-child(odd)::after {
+    right: 0;
+    transform: translateX(100%);
+    border-left: none;
+    border-radius: 0 50px 50px 0;
+  }
+
+  .section:nth-child(even)::before {
+    left: 0;
+    transform: translateX(-100%);
+    border-right: none;
+    border-radius: 50px 0 0 50px;
   }
 
   .section-content {
     display: flex;
-    justify-content: center;
-    padding: 0 20px;
+    align-items: center;
+    gap: 40px;
+    margin: 20px 0px;
   }
 
   .section:nth-child(even) .section-content {
     flex-direction: row-reverse;
   }
 
-  .section:nth-child(even) .section-text {
+  p {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: justify;
+  }
+
+  ul {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: justify;
     padding-left: 1rem;
   }
 
-  p {
-    font-family: 'Inter', sans-serif;
-    font-weight: normal;
+  h3 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
   }
 
-  h3 {
-    text-align: left;
+  #cross-icon {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    display: none;
+    width: 100px;
+    height: 100px;
+  }
+
+  .section-icon {
+    display: none;
   }
 
   .image {
-    max-width: 100%;
-    height: 100%;
+    object-fit: contain;
+    max-width: 180px;
+    max-height: 180px;
+  }
+
+  @media (min-width: 43rem) {
+    h3 {
+      text-align: left;
+    }
+
+    .section-icon {
+      display: block;
+    }
+
+    .section-content {
+      margin: 40px 0px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .section:nth-child(odd)::after,
+    .section:nth-child(even)::before {
+      content: '';
+    }
+
+    .section {
+      border-bottom: 2px dashed #e4780c;
+    }
+
+    .section:first-child {
+      border-top: 2px dashed #e4780c;
+    }
+
+    .section-content {
+      margin: 60px 0px;
+    }
+
+    #cross-icon {
+      display: block;
+    }
   }
 </style>

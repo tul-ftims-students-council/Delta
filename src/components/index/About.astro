@@ -1,0 +1,232 @@
+---
+import Container from 'components/shared/Container.astro';
+import RegularText from 'components/shared/RegularText.astro';
+import SectionHeader from 'components/shared/SectionHeader.astro';
+---
+
+<Container>
+  <div class="wrapper">
+    <div class="flex-row content-row">
+      <div class="img-wrapper">
+        <img class="content-img" src="https://via.placeholder.com/550x550" alt="Uczestnicy" />
+        <div class="flex-column">
+          <SectionHeader color="brown">O Delcie</SectionHeader>
+          <RegularText fontSize="20">Co to? Dla kogo?</RegularText>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="flex-column desktop-text">
+          <SectionHeader color="brown">O Delcie</SectionHeader>
+          <RegularText fontSize="20">Co to? Dla kogo?</RegularText>
+        </div>
+        <RegularText fontSize="20">
+          <span class="bold">Delta</span>
+          to studencki wyjazd szkoleniowo-integracyjny organizowany przez
+          <span class="bold"
+            >Wydziałową Radę Samorządu Wydziału Fizyki Technicznej, Informatyki i Matematyki Stosowanej.</span
+          >
+        </RegularText>
+        <div class="flex-row cactus-row">
+          <RegularText fontSize="20">
+            W trakcie wyjazdu dbamy o
+            <span class="bold">integrację</span>
+            oraz rozwijamy swoje umiejętności podczas
+            <span class="bold">szkoleń.</span>
+            Nieważne, czy dopiero rozpoczynasz studia, czy po prostu chcesz poznać ludzi z kierunku...
+            <span class="bold">DELTA to idealny wyjazd dla każdego!</span>
+          </RegularText>
+          <img class="cactus" src="../../assets/cactus.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="flex-row bottom-content content-row">
+      <div class="img-wrapper row-reverse">
+        <img class="content-img" src="https://via.placeholder.com/550x550" alt="Ośrodek" />
+        <div class="flex-column">
+          <SectionHeader color="brown">Ośrodek</SectionHeader>
+          <RegularText fontSize="20">Zobacz, gdzie pojedziemy tym razem.</RegularText>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="flex-column desktop-text">
+          <SectionHeader color="brown">Ośrodek</SectionHeader>
+          <RegularText fontSize="20">Zobacz, gdzie pojedziemy tym razem.</RegularText>
+        </div>
+        <RegularText fontSize="20">
+          <span class="bold">Bądź czujny!</span>
+          Tegoroczny motyw to Dziki Zachód, ale nasze rodeo spędzimy na południowym-wschodzie Łodzi.
+          <span class="bold">Ośrodek Wypoczynkowy “Marysieńka”</span>
+          znajduje się nad Zalewem Topornia. Ogrodzony teren ośrodka mieści bar, stołówkę, świetlicę oraz parking. Każdy
+          domek posiada
+          <span class="bold">ogrzewanie,</span>
+          toaletę, TV, jak i
+          <span class="bold">lodówkę.</span>
+        </RegularText>
+        <div class="flex-row cactus-row">
+          <div class="flex-column info-box">
+            <h4 class="info-header">Szczegółowe informacje:</h4>
+            <p class="info-text">Ośrodek Wypoczynkowy „Marysieńka” Topornia 23, 26-400 Przysucha</p>
+          </div>
+          <img class="cactus" src="../../assets/cactus.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</Container>
+
+<style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 112px;
+    margin: 0 var(--padding-side);
+  }
+
+  .flex-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .row-reverse {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .content-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .img-wrapper {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-img {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .desktop-text {
+    display: none;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .cactus-row {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .info-box {
+    gap: 8px;
+    padding: 10px;
+    box-shadow: 0px 6px 12px rgba(29, 10, 6, 0.08);
+    border-radius: 10px;
+    color: var(--brown);
+  }
+
+  .info-header {
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .info-text {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .cactus {
+    display: none;
+  }
+
+  @media (min-width: 43rem) {
+    .content-row {
+      gap: 25px;
+    }
+
+    .img-wrapper {
+      gap: 30px;
+    }
+
+    .content-img {
+      width: 220px;
+    }
+
+    .info-header {
+      font-size: 16px;
+    }
+
+    .info-text {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .content-row {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .img-wrapper > .flex-column {
+      display: none;
+    }
+
+    .bottom-content {
+      flex-direction: row-reverse;
+    }
+
+    .desktop-text {
+      display: block;
+    }
+
+    .content-img {
+      width: 550px;
+    }
+
+    .cactus-row {
+      justify-content: space-between;
+    }
+
+    .info-box {
+      margin-right: 20px;
+    }
+
+    .info-header {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .info-text {
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .cactus {
+      flex-shrink: 0;
+      display: block;
+      width: 100px;
+    }
+  }
+</style>
