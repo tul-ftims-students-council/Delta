@@ -1,12 +1,13 @@
 ---
 interface Props {
   textAlign?: 'center' | 'start';
+  color?: 'brown' | 'white';
 }
 
-const { textAlign = 'start' } = Astro.props;
+const { textAlign = 'start', color = 'white' } = Astro.props;
 ---
 
-<h2 class={`header ${textAlign}`}>
+<h2 class={`header ${textAlign} ${color}`}>
   <slot />
 </h2>
 
@@ -15,7 +16,6 @@ const { textAlign = 'start' } = Astro.props;
     margin: 0;
     font-size: 20px;
     font-weight: 700;
-    color: var(--white);
     text-transform: uppercase;
   }
 
@@ -25,6 +25,13 @@ const { textAlign = 'start' } = Astro.props;
 
   .header.center {
     text-align: center;
+  }
+
+  .header.white {
+    color: var(--white);
+  }
+  .header.brown {
+    color: var(--brown);
   }
 
   @media (min-width: 43rem) {

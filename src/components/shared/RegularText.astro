@@ -2,12 +2,13 @@
 interface Props {
   color?: 'brown' | 'white';
   textAlign?: 'center' | 'start';
+  fontSize?: '18' | '20';
 }
 
-const { color = 'brown', textAlign = 'start' } = Astro.props;
+const { color = 'brown', textAlign = 'start', fontSize = '18' } = Astro.props;
 ---
 
-<p class={`regular ${color} ${textAlign}`}>
+<p class={`regular ${color} ${textAlign} ${fontSize}`}>
   <slot />
 </p>
 
@@ -15,9 +16,17 @@ const { color = 'brown', textAlign = 'start' } = Astro.props;
   .regular {
     margin: 0;
     font-family: var(--font-secondary);
-    font-size: 12px;
     font-weight: 400;
+    line-height: 24px;
     color: var(--white);
+  }
+
+  .regular.18 {
+    font-size: 12px;
+  }
+
+  .regular.20 {
+    font-size: 14px;
   }
 
   .regular.white {
@@ -37,13 +46,28 @@ const { color = 'brown', textAlign = 'start' } = Astro.props;
 
   @media (min-width: 43rem) {
     .regular {
+      line-height: 28px;
+    }
+
+    .regular.18 {
       font-size: 14px;
+    }
+    .regular.20 {
+      font-size: 16px;
     }
   }
 
   @media (min-width: 62rem) {
     .regular {
+      line-height: 32px;
+    }
+
+    .regular.18 {
       font-size: 18px;
+    }
+
+    .regular.20 {
+      font-size: 20px;
     }
   }
 </style>
