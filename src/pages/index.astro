@@ -40,7 +40,19 @@ import About from 'components/index/About.astro';
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 100px;
+    gap: 20px;
     padding-bottom: 150px;
+  }
+
+  @media (min-width: 43rem) {
+    main {
+      gap: 60px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    main {
+      gap: 100px;
+    }
   }
 </style>
