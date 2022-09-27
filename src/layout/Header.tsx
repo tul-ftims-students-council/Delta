@@ -9,6 +9,28 @@ interface Props extends ParentProps {
 const Header = ({ activeRoute, children }: Props) => {
   const [menuOpen, setMenuOpen] = createSignal(false);
 
+  const handleNavClick = (key: string) => {
+    setMenuOpen(false);
+
+    // Temporary solution
+    let counter = 0;
+
+    const scrollInterval = setInterval(() => {
+      if (counter > 20) clearInterval(scrollInterval);
+
+      const el = document.querySelector(`#scroll-${key}`);
+
+      if (el) {
+        const scrollY = el.getBoundingClientRect().y + window.scrollY - 125;
+        window.scroll({ top: scrollY, behavior: 'smooth' });
+
+        clearInterval(scrollInterval);
+      }
+
+      counter += 1;
+    }, 100);
+  };
+
   return (
     <HeaderWrapper>
       <div>
@@ -21,7 +43,7 @@ const Header = ({ activeRoute, children }: Props) => {
               <ul>
                 {Object.entries(routes).map(([key, value]) => (
                   <li class={value === activeRoute ? 'active' : ''}>
-                    <a href={`#${key}`} onClick={() => setMenuOpen(false)}>
+                    <a href={`/#${key}`} onClick={() => handleNavClick(key)}>
                       {value}
                     </a>
                   </li>
