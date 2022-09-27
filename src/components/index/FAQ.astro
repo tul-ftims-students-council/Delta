@@ -119,11 +119,11 @@ const sections: Section[] = [
     margin-bottom: 20px;
   }
   #faq-title {
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 700;
   }
   #faq-description {
-    font-size: 20px;
+    font-size: 14px;
     text-align: center;
   }
 
@@ -187,9 +187,14 @@ const sections: Section[] = [
     padding-left: 1rem;
   }
 
+  li {
+    font-size: 14px;
+    margin: 8px 0;
+  }
+
   h3 {
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
   }
 
@@ -213,8 +218,22 @@ const sections: Section[] = [
   }
 
   @media (min-width: 43rem) {
+    #faq-title {
+      font-size: 30px;
+    }
+
+    #faq-description {
+      font-size: 16px;
+    }
+
     h3 {
       text-align: left;
+      font-size: 18px;
+    }
+
+    li {
+      font-size: 16px;
+      margin: 12px 0;
     }
 
     .section-icon {
@@ -227,6 +246,23 @@ const sections: Section[] = [
   }
 
   @media (min-width: 62rem) {
+    #faq-title {
+      font-size: 40px;
+    }
+
+    #faq-description {
+      font-size: 14px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+
+    li {
+      font-size: 18px;
+      margin: 16px 0;
+    }
+
     .section:nth-child(odd)::after,
     .section:nth-child(even)::before {
       content: '';
