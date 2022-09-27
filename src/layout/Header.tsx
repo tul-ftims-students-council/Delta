@@ -70,6 +70,7 @@ const HeaderWrapper = styled.header`
 
   & > div {
     padding: 20px 0;
+    background-color: #fff;
     box-shadow: var(--gray-color-80) 0 6px 12px;
 
     & > div {
@@ -81,12 +82,6 @@ const HeaderWrapper = styled.header`
 
   img {
     height: 50px;
-  }
-
-  @media (max-width: 425px) {
-    & {
-      height: 32px;
-    }
   }
 `;
 
