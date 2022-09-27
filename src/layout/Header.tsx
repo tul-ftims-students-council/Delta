@@ -27,7 +27,7 @@ const Header = ({ activeRoute, children }: Props) => {
                   </li>
                 ))}
                 <RegisterLi>
-                  <a href={'/register'} onClick={() => setMenuOpen(false)}>
+                  <a href="/register" onClick={() => setMenuOpen(false)}>
                     Zarejestruj się
                   </a>
                 </RegisterLi>
