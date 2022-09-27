@@ -172,9 +172,10 @@ const sections: Section[] = [
     flex-direction: row-reverse;
   }
 
-  p {
+  p,
+  li {
     font-family: 'Inter', sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
     text-align: justify;
   }
@@ -188,7 +189,6 @@ const sections: Section[] = [
   }
 
   li {
-    font-size: 14px;
     margin: 8px 0;
   }
 
@@ -232,8 +232,12 @@ const sections: Section[] = [
     }
 
     li {
-      font-size: 16px;
       margin: 12px 0;
+    }
+
+    p,
+    li {
+      font-size: 16px;
     }
 
     .section-icon {
@@ -259,8 +263,12 @@ const sections: Section[] = [
     }
 
     li {
-      font-size: 18px;
       margin: 16px 0;
+    }
+
+    p,
+    li {
+      font-size: 18px;
     }
 
     .section:nth-child(odd)::after,
