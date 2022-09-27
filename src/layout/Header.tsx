@@ -1,19 +1,21 @@
-import { createSignal } from 'solid-js';
+import { createSignal, ParentProps } from 'solid-js';
 import { styled } from 'solid-styled-components';
 import routes from 'utils/routes';
 
-interface Props {
+interface Props extends ParentProps {
   activeRoute: typeof routes[keyof typeof routes];
 }
 
-const Header = ({ activeRoute }: Props) => {
+const Header = ({ activeRoute, children }: Props) => {
   const [menuOpen, setMenuOpen] = createSignal(false);
 
   return (
     <HeaderWrapper>
       <div>
         <div class="container">
-          <img src="/assets/logo.png" alt="logo" />
+          <a href="/">
+            <img src="/assets/logo.png" alt="logo" />
+          </a>
           <div class="nav-wrapper">
             <Navigation open={menuOpen()}>
               <ul>
@@ -24,6 +26,11 @@ const Header = ({ activeRoute }: Props) => {
                     </a>
                   </li>
                 ))}
+                <RegisterLi>
+                  <a href={'/register'} onClick={() => setMenuOpen(false)}>
+                    Zarejestruj się
+                  </a>
+                </RegisterLi>
               </ul>
             </Navigation>
             <Hamburger class="hamburger" onClick={() => setMenuOpen(!menuOpen())}>
@@ -35,11 +42,24 @@ const Header = ({ activeRoute }: Props) => {
               />
             </Hamburger>
           </div>
+          <ButtonWrapper>{children}</ButtonWrapper>
         </div>
       </div>
     </HeaderWrapper>
   );
 };
+
+const ButtonWrapper = styled.div`
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
+
+const RegisterLi = styled.li`
+  @media (min-width: 1000px) {
+    display: none;
+  }
+`;
 
 const HeaderWrapper = styled.header`
   background-color: var(--white);
@@ -103,7 +123,7 @@ const Navigation = styled.nav<NavigationProps>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     & {
       display: ${(props) => (props.open ? 'flex' : 'none')};
       background-color: var(--white);
@@ -146,7 +166,7 @@ const Hamburger = styled.button`
     object-fit: contain;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     & {
       display: flex;
     }

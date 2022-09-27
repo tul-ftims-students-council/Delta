@@ -1,0 +1,17 @@
+---
+import Layout from 'layout/Layout.astro';
+import RegisterForm from 'components/register/RegisterForm';
+import Button from 'components/shared/Button.astro';
+---
+
+<Layout title="DELTA - rejestracja">
+  <main>
+    <RegisterForm client:only="solid-js"><Button type="submit">Zarejestruj się</Button></RegisterForm>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 3rem 0;
+  }
+</style>
