@@ -15,12 +15,8 @@ import GalleryImage from './GalleryImage';
     </div>
     <div class="img-grid">
       {
-        [...Array(8).keys()].map(() => (
-          <GalleryImage
-            src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-            alt="Gallery image"
-            client:visible
-          />
+        [...Array(8).keys()].map((number) => (
+          <GalleryImage src={`/assets/gallery/${number + 1}.jpg`} alt={`Gallery image ${number + 1}`} client:visible />
         ))
       }
     </div>
