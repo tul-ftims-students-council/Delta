@@ -65,7 +65,7 @@ const HeaderWrapper = styled.header`
   background-color: var(--white);
   position: sticky;
   isolation: isolate;
-  z-index: 100;
+  z-index: 1;
   top: 0;
 
   & > div {
