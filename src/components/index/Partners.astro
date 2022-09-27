@@ -19,6 +19,7 @@ import Container from 'components/shared/Container.astro';
       <img src="/assets/partners/KrólKul.png" />
       <img src="/assets/partners/RydwanyMiasta.png" />
       <img src="/assets/partners/Finestra.png" />
+      <img src="/assets/partners/logo_tkalnia.svg" class="tkalnia" />
     </div>
   </div>
 </Container>
@@ -61,6 +62,11 @@ import Container from 'components/shared/Container.astro';
 
   .logos > img {
     max-width: 40%;
+  }
+
+  /* asap fix */
+  .tkalnia {
+    max-width: min(40%, 200px) !important;
   }
 
   @media (min-width: 43rem) {
