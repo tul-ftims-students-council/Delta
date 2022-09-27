@@ -9,6 +9,28 @@ interface Props extends ParentProps {
 const Header = ({ activeRoute, children }: Props) => {
   const [menuOpen, setMenuOpen] = createSignal(false);
 
+  const handleNavClick = (key: string) => {
+    setMenuOpen(false);
+
+    // Temporary solution
+    let counter = 0;
+
+    const scrollInterval = setInterval(() => {
+      if (counter > 20) clearInterval(scrollInterval);
+
+      const el = document.querySelector(`#scroll-${key}`);
+
+      if (el) {
+        const scrollY = el.getBoundingClientRect().y + window.scrollY - 125;
+        window.scroll({ top: scrollY, behavior: 'smooth' });
+
+        clearInterval(scrollInterval);
+      }
+
+      counter += 1;
+    }, 100);
+  };
+
   return (
     <HeaderWrapper>
       <div>
@@ -21,13 +43,13 @@ const Header = ({ activeRoute, children }: Props) => {
               <ul>
                 {Object.entries(routes).map(([key, value]) => (
                   <li class={value === activeRoute ? 'active' : ''}>
-                    <a href={`#${key}`} onClick={() => setMenuOpen(false)}>
+                    <a href={`/#${key}`} onClick={() => handleNavClick(key)}>
                       {value}
                     </a>
                   </li>
                 ))}
                 <RegisterLi>
-                  <a href={'/register'} onClick={() => setMenuOpen(false)}>
+                  <a href="/register" onClick={() => setMenuOpen(false)}>
                     Zarejestruj się
                   </a>
                 </RegisterLi>
@@ -65,11 +87,12 @@ const HeaderWrapper = styled.header`
   background-color: var(--white);
   position: sticky;
   isolation: isolate;
-  z-index: 100;
+  z-index: 1;
   top: 0;
 
   & > div {
     padding: 20px 0;
+    background-color: #fff;
     box-shadow: var(--gray-color-80) 0 6px 12px;
 
     & > div {
@@ -81,12 +104,6 @@ const HeaderWrapper = styled.header`
 
   img {
     height: 50px;
-  }
-
-  @media (max-width: 425px) {
-    & {
-      height: 32px;
-    }
   }
 `;
 

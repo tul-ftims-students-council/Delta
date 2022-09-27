@@ -8,25 +8,21 @@ import GalleryImage from './GalleryImage';
 ---
 
 <OrangeContainer>
-  <div class="content-wrapper">
+  <div id="scroll-gallery" class="content-wrapper">
     <div class="description-wrapper">
       <SectionHeader>Galeria</SectionHeader>
       <SectionSubtitle>Sprawdź jak było w poprzednich latach.</SectionSubtitle>
     </div>
     <div class="img-grid">
       {
-        [...Array(8).keys()].map(() => (
-          <GalleryImage
-            src={`https://picsum.photos/1600/900?random=${String(Math.floor(Math.random() * 100))}`}
-            alt="Gallery image"
-            client:visible
-          />
+        [...Array(8).keys()].map((number) => (
+          <GalleryImage src={`/assets/gallery/${number + 1}.jpg`} alt={`Gallery image ${number + 1}`} client:visible />
         ))
       }
     </div>
     <div class="description-wrapper bottom">
       <p class="description-text">Zainteresowany?</p>
-      <Button type="link" href="#" variant="secondary">Pokaż mi więcej</Button>
+      <Button type="link" href="/register" variant="secondary">Pokaż mi więcej</Button>
     </div>
   </div>
 </OrangeContainer>

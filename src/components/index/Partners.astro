@@ -3,54 +3,99 @@ import Container from 'components/shared/Container.astro';
 ---
 
 <Container>
-  <h2>PARTNERZY STRATEGICZNI</h2>
-  <p>Poznaj firmy bez których wyjazd nie byłby możliwy!</p>
-  <div class="logos">
-    <img src="/assets/partners/NiceGuys.png" height="40" width="249" />
-    <img src="/assets/partners/Deloitte Digital.png" height="80" width="174" />
-    <img src="/assets/partners/Commerzbank.png" height="50" width="381" />
-  </div>
-  <h3>PARTNERZY</h3>
-  <div class="logos">
-    <img src="/assets/partners/Indeks.png" height="80" width="239" />
-    <img src="/assets/partners/KrólKul.png" height="80" width="114" />
-    <img src="/assets/partners/RydwanyMiasta.png" height="80" width="106" />
-    <img src="/assets/partners/Finestra.png" height="50" width="248" />
+  <div class="wrapper">
+    <div class="header-wrapper">
+      <h2>PARTNERZY STRATEGICZNI</h2>
+      <p>Poznaj firmy bez których wyjazd nie byłby możliwy!</p>
+    </div>
+    <div class="logos">
+      <img src="/assets/partners/NiceGuys.png" />
+      <img src="/assets/partners/Deloitte Digital.png" />
+      <img src="/assets/partners/Commerzbank.png" />
+    </div>
+    <h2>PARTNERZY</h2>
+    <div class="logos">
+      <img src="/assets/partners/Indeks.png" />
+      <img src="/assets/partners/KrólKul.png" />
+      <img src="/assets/partners/RydwanyMiasta.png" />
+      <img src="/assets/partners/Finestra.png" />
+      <img src="/assets/partners/logo_tkalnia.svg" class="tkalnia" />
+    </div>
   </div>
 </Container>
 
 <style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 var(--padding-side);
+  }
+
+  .header-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   h2 {
-    font-size: 40px;
-    padding-top: 40px;
-    margin: 0 auto;
-  }
-
-  h3 {
-    font-size: 32px;
-    margin-top: 64px;
-    margin-bottom: 32px;
-  }
-
-  h2,
-  h3 {
-    font-weight: bold;
+    margin: 0;
+    font-size: 20px;
     text-align: center;
-    font-family: 'Lemon Milk';
   }
 
   p {
-    font-size: 20px;
+    font-size: 14px;
     font-family: 'Inter', sans-serif;
     font-weight: normal;
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 50px;
+    margin: 0;
   }
+
   .logos {
     display: flex;
-    justify-content: space-evenly;
-    padding-top: 30px;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .logos > img {
+    max-width: 40%;
+  }
+
+  /* asap fix */
+  .tkalnia {
+    max-width: min(40%, 200px) !important;
+  }
+
+  @media (min-width: 43rem) {
+    .wrapper,
+    .logos {
+      gap: 40px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .wrapper,
+    .logo {
+      gap: 60px;
+    }
+
+    h2 {
+      font-size: 40px;
+    }
+
+    p {
+      font-size: 20px;
+    }
   }
 </style>
