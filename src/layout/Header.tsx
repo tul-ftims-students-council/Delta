@@ -44,7 +44,7 @@ const Header = ({ activeRoute, children }: Props) => {
                 {Object.entries(routes).map(([key, value]) => (
                   <li class={value === activeRoute ? 'active' : ''}>
                     <a
-                      href={key === 'termsConditions' ? '/assets/pdfs/regulamin.pdf' : `/#${key}`}
+                      href={key === 'termsConditions' ? '/regulamin.pdf' : `/#${key}`}
                       onClick={() => handleNavClick(key)}
                     >
                       {value}
