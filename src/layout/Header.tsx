@@ -43,7 +43,10 @@ const Header = ({ activeRoute, children }: Props) => {
               <ul>
                 {Object.entries(routes).map(([key, value]) => (
                   <li class={value === activeRoute ? 'active' : ''}>
-                    <a href={`/#${key}`} onClick={() => handleNavClick(key)}>
+                    <a
+                      href={key === 'termsConditions' ? '/assets/pdfs/regulamin.pdf' : `/#${key}`}
+                      onClick={() => handleNavClick(key)}
+                    >
                       {value}
                     </a>
                   </li>
