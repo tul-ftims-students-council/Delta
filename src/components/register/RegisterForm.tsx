@@ -9,7 +9,7 @@ import { reporter } from '@felte/reporter-solid';
 import Input from './Input.jsx';
 import CustomCheckbox from './CutomCheckbox.jsx';
 
-const REGULAMIN = `Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny <a>pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.`;
+const REGULAMIN = `Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny <a href="/regulamin.pdf">pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.`;
 const RODO = `Wyrażam zgodę na przetwarzanie moich danych osobowych przez Politechnikę Łódzką, adres siedziby: ul.
 Żeromskiego 116, 90-924 Łódź, jako administratora, w celu zorganizowania i przeprowadzenia wyjazdu
 integracyjno-szkoleniowego "Delta 2022" (dalej: Delty). Dane w zakresie imię i nazwisko, adres e-mail i
@@ -20,17 +20,17 @@ przesłanie oświadczenia o wycofaniu zgody na adres: iod@adm.p.lodz.pl, wycofan
 na zgodność z prawem przetwarzania, którego dokonano na podstawie tej zgody przed jej wycofaniem. Także
 zgadzam się na otrzymywanie wiadomości tekstowych dotyczących spraw organizacyjnych związanych z Deltą
 na adres e-mail (i numer telefonu) podany w formularzu. Klauzula RODO dostępna jest
-<a href="#">tutaj</a>.`;
+<a href="/klauzula-rodo.pdf">tutaj</a>.`;
 
 const schema = z
   .object({
     name: z
       .string()
-      .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
+      .min(3, { message: 'Musi zawierać conajmniej 3 znaki' })
       .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
     surname: z
       .string()
-      .min(4, { message: 'Musi zawierać conajmniej 4 znaki' })
+      .min(3, { message: 'Musi zawierać conajmniej 3 znaki' })
       .max(20, { message: 'Moze zawierać maksymalnie 20 znaków' }),
     email: z.string().email({ message: 'Niepoprawny adres email' }).min(1, { message: 'To pole nie może być puste' }),
     confirmEmail: z
