@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { styled } from 'solid-styled-components';
 
 import { createForm } from '@felte/solid';
-import { Component, createResource, createSignal, ParentProps } from 'solid-js';
+import { Component, createSignal, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
