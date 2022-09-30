@@ -1,0 +1,17 @@
+---
+import Layout from 'layout/Layout.astro';
+import PaymentForm from 'components/forms/PaymentForm';
+import Button from 'components/shared/Button.astro';
+---
+
+<Layout title="DELTA - płatność">
+  <main>
+    <PaymentForm client:only="solid-js"><Button type="submit">Potwierdź</Button></PaymentForm>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 3rem 0;
+  }
+</style>

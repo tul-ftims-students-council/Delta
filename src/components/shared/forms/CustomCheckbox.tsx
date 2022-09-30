@@ -43,6 +43,10 @@ const CheckboxWrapper = styled.div`
     margin-right: 20px;
     position: relative;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &:checked {
       border: 1px solid black;
 

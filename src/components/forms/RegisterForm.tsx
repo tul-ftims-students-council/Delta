@@ -1,14 +1,24 @@
 import { z } from 'zod';
-import { styled } from 'solid-styled-components';
 
 import { createForm } from '@felte/solid';
 import { Component, createSignal, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
-import Input from './Input.jsx';
-import CustomCheckbox from './CutomCheckbox.jsx';
+import Input from '../shared/forms/Input.jsx';
+import CustomCheckbox from 'components/shared/forms/CustomCheckbox.jsx';
 import Loader from 'components/shared/Loader.jsx';
+import {
+  SuccessMessage,
+  ErrorMessage,
+  Container,
+  FormSubtitle,
+  MainContent,
+  FormWrapper,
+  Row,
+  SubmitButton,
+  FormTitle,
+} from 'components/shared/forms/Styles.jsx';
 
 const REGULAMIN = `Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny <a href="/regulamin.pdf">pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.`;
 const RODO = `Wyrażam zgodę na przetwarzanie moich danych osobowych przez Politechnikę Łódzką, adres siedziby: ul.
@@ -53,7 +63,7 @@ const schema = z
 type FormSchema = z.infer<typeof schema>;
 
 const submitFormData = async ({ name, surname, email, phoneNumber }: FormSchema) => {
-  const response = await fetch(`https://delta-go.onrender.com/users/register`, {
+  const response = await fetch(`http://127.0.0.1:10000/users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -91,8 +101,8 @@ const RegisterForm: Component<ParentProps> = ({ children }) => {
 
   return (
     <Container>
-      <Register>Rejestracja</Register>
-      <RegisterSubtitle>Wypełnij formularz i dostań informację o starcie płatności.</RegisterSubtitle>
+      <FormTitle>Rejestracja</FormTitle>
+      <FormSubtitle>Wypełnij formularz i dostań informację o starcie płatności.</FormSubtitle>
       <MainContent>
         <img src="/assets/cowboy.png" alt="Cowboy on a horse" />
         <FormWrapper>
@@ -131,140 +141,5 @@ const RegisterForm: Component<ParentProps> = ({ children }) => {
     </Container>
   );
 };
-
-const MainContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80vw;
-  margin-top: 5vh;
-  margin-bottom: 35px;
-
-  @media (max-width: 1200px) {
-    width: 90vw;
-    justify-content: center;
-  }
-
-  @media (max-width: 722px) {
-    margin-top: 20px;
-  }
-
-  @media (max-width: 425px) {
-    margin-top: 10px;
-  }
-
-  & > img {
-    width: 400px;
-    height: 100%;
-    object-fit: cover;
-    margin-right: 20px;
-
-    @media (max-width: 1200px) {
-      display: none;
-    }
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-
-  @media (max-width: 722px) {
-    flex-direction: column;
-    margin-bottom: 0;
-  }
-`;
-
-const Message = styled.span`
-  font-family: Inter;
-  margin-top: 4px;
-  font-size: 10px;
-  min-height: 16px;
-  font-weight: 300;
-  display: flex;
-  justify-content: flex-start;
-
-  @media (max-width: 722px) {
-    justify-content: center;
-  }
-`;
-
-const ErrorMessage = styled(Message)`
-  color: red;
-`;
-
-const SuccessMessage = styled(Message)`
-  color: green;
-`;
-
-const SubmitButton = styled.div<{ isLoading: boolean }>`
-  display: flex;
-  justify-content: ${(props) => (props.isLoading ? 'center' : 'flex-end')};
-  margin-top: 1rem;
-
-  @media (max-width: 722px) {
-    justify-content: center;
-  }
-`;
-
-const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media (max-width: 425px) {
-    padding-top: 30px;
-  }
-`;
-
-const Register = styled.div`
-  text-transform: uppercase;
-  font-size: 40px;
-  font-weight: 700;
-
-  @media (max-width: 722px) {
-    font-size: 20px;
-  }
-`;
-
-const RegisterSubtitle = styled.p`
-  font-size: 20px;
-  font-weight: 300px;
-  font-family: Inter;
-  max-width: 60vw;
-
-  @media (max-width: 722px) {
-    font-size: 12px;
-  }
-`;
-
-const FormWrapper = styled.div`
-  background-color: white;
-  box-shadow: 0px 6px 12px rgba(29, 10, 6, 0.08);
-  border-radius: 40px;
-  padding: 50px 70px;
-  width: 50%;
-
-  @media (max-width: 1500px) {
-    width: 55%;
-    padding: 50px 60px;
-  }
-
-  @media (max-width: 1200px) {
-    width: 60vw;
-  }
-
-  @media (max-width: 800px) {
-    padding: 40px 50px;
-    border-radius: 10px;
-    width: 65vw;
-  }
-
-  @media (max-width: 722px) {
-    padding: 20px 30px;
-    width: 70vw;
-  }
-`;
 
 export default RegisterForm;
