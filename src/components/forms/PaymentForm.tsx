@@ -20,6 +20,13 @@ import {
   Row,
   SubmitButton,
   SuccessMessage,
+  InfoCards,
+  Card,
+  CardHeader,
+  CardSubheader,
+  CardSubtitle,
+  CardSubheaderBottom,
+  CardSubtitleBottom,
 } from 'components/shared/forms/Styles.jsx';
 import Select from 'components/shared/forms/Select.jsx';
 import Option from 'components/shared/forms/Option.jsx';
@@ -137,7 +144,41 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       <FormTitle>Płatności</FormTitle>
       <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
       <MainContent>
-        <img src="/assets/cowboy.png" alt="Cowboy on a horse" />
+        <InfoCards>
+          <div>header</div>
+          <Card>
+            <CardHeader>Dane do przelewu</CardHeader>
+            <CardSubheader>KWOTA</CardSubheader>
+            <CardSubtitle>350zł</CardSubtitle>
+
+            <CardSubheader>odbiorca</CardSubheader>
+            <CardSubtitle>
+              POLITECHNIKA ŁÓDZKA
+              <br />
+              Wydział Fizyki Technicznej, Informatyki i Matematyki Stosowanej
+              <br />
+              ul. Wólczańska 21
+              <br />
+              593-005 Łódź
+            </CardSubtitle>
+
+            <CardSubheader>tytuł przelewu</CardSubheader>
+            <CardSubtitle>Delta 2022 - Imię Nazwisko</CardSubtitle>
+
+            <CardSubheader>nr konta odbiorcy</CardSubheader>
+            <CardSubtitle>23 1240 3028 1111 0010 3742 1516</CardSubtitle>
+          </Card>
+          <Card>
+            <CardHeader>Przydatne linki</CardHeader>
+            <CardSubheaderBottom>
+              <a href="/oswiadczenie">Oświadczenie obozowe</a>
+            </CardSubheaderBottom>
+            <CardSubtitleBottom>Wypełniony dokument jest niezbędny do odprawy!</CardSubtitleBottom>
+
+            <CardSubheaderBottom>wymiary koszulek</CardSubheaderBottom>
+            <CardSubtitleBottom>Tabelka z danymi szczegółowymi od producenta.</CardSubtitleBottom>
+          </Card>
+        </InfoCards>
         <FormWrapper>
           <form use:form>
             <Row>
