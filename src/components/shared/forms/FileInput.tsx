@@ -11,16 +11,20 @@ export default function FileInput({ name, label, placeholder, ...props }: InputP
   return (
     <InputWrapper>
       <label for={name}>{label}</label>
-      <input {...props} name={name} type="file"></input>
-      <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+      <div class="wrapper">
+        <span class="fake-input">Wybierz plik</span>
+        <input {...props} name={name} type="file"></input>
+        <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+      </div>
     </InputWrapper>
   );
 }
 
 const ErrorMessage = styled.span`
-  color: red;
+  color: #300f07;
   font-family: Inter;
   margin-top: 2px;
+  margin-left: 10px;
   font-size: 10px;
   min-height: 12px;
   font-weight: 300;
@@ -31,60 +35,73 @@ const InputWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  line-height: 40px;
+  border-radius: 10px;
+
+  width: 15vw;
+  min-width: 170px;
+
+  @media (max-width: 1500px) {
+    width: 16vw;
+  }
+
+  @media (max-width: 1200px) {
+    width: 22vw;
+    justify-content: center;
+  }
+
+  @media (max-width: 722px) {
+    width: 100%;
+    font-size: 12px;
+  }
 
   /* Chrome, Safari, Edge, Opera */
-  & > input::-webkit-outer-spin-button,
+  & input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  & > input {
-    font-size: 14px;
-    font-family: Inter;
-    font-weight: 600;
-    line-height: 40px;
-    border-radius: 10px;
-    padding: 0px 14px;
-    background: #ffffff;
-    border: 2px solid rgba(48, 15, 7, 0.25);
-    border-radius: 10px;
-    color: #e4780c;
-    width: 15vw;
-    min-width: 170px;
+  & input {
+    width: 97px;
+    height: 34px;
+    opacity: 0;
 
-    @media (max-width: 1500px) {
-      width: 16vw;
-    }
-
-    @media (max-width: 1200px) {
-      width: 22vw;
-      justify-content: center;
-    }
-
-    @media (max-width: 722px) {
-      width: 100%;
-      font-size: 12px;
-    }
-    /* Firefox */
-    -moz-appearance: textfield;
-
-    &::placeholder {
-      font-size: 14px;
-      color: rgba(48, 15, 7, 0.25);
-
-      @media (max-width: 722px) {
-        font-size: 12px;
-      }
+    &:hover {
+      cursor: pointer;
     }
 
     &:focus {
       outline: none;
-      border: 2px solid #e4780c;
+      border: none;
     }
   }
 
-  & > label {
+  .wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    & > .fake-input {
+      position: absolute;
+      top: 6px;
+      font-size: 10px;
+      line-height: 14px;
+      padding: 10px 14px;
+
+      background-color: rgba(48, 15, 7, 0.25);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.07);
+      border-radius: 10px;
+      text-transform: uppercase;
+      color: white;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  & label {
     font-weight: 700;
     font-size: 14px;
     line-height: 28px;
