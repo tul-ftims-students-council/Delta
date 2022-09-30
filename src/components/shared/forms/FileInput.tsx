@@ -7,14 +7,16 @@ interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'ty
   label: string;
 }
 
-export default function FileInput({ name, label, placeholder, ...props }: InputProps) {
+export default function FileInput(props: InputProps) {
   return (
     <InputWrapper>
-      <label for={name}>{label}</label>
+      <label for={props.name}>{props.label}</label>
       <div class="wrapper">
         <span class="fake-input">Wybierz plik</span>
-        <input {...props} name={name} type="file"></input>
-        <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+        <input {...props} name={props.name} type="file"></input>
+        <ValidationMessage for={props.name}>
+          {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
+        </ValidationMessage>
       </div>
     </InputWrapper>
   );
@@ -66,10 +68,7 @@ const InputWrapper = styled.div`
     width: 97px;
     height: 34px;
     opacity: 0;
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
 
     &:focus {
       outline: none;
@@ -95,9 +94,7 @@ const InputWrapper = styled.div`
       text-transform: uppercase;
       color: white;
 
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
   }
 

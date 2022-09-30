@@ -7,14 +7,16 @@ interface SelectProps extends JSX.InputHTMLAttributes<HTMLSelectElement> {
   label: string;
 }
 
-export default function Select({ name, label, placeholder, children, ...props }: SelectProps) {
+export default function Select(props: SelectProps) {
   return (
     <InputWrapper>
-      <label for={name}>{label}</label>
-      <select name={name} {...props}>
-        <optgroup>{children}</optgroup>
+      <label for={props.name}>{props.label}</label>
+      <select {...props} name={props.name}>
+        <optgroup>{props.children}</optgroup>
       </select>
-      <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+      <ValidationMessage for={props.name}>
+        {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
+      </ValidationMessage>
     </InputWrapper>
   );
 }

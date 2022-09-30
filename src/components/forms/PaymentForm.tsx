@@ -31,8 +31,9 @@ import {
 import Select from 'components/shared/forms/Select.jsx';
 import Option from 'components/shared/forms/Option.jsx';
 import FileInput from 'components/shared/forms/FileInput.jsx';
+import ReservationCounter from 'components/payment/ReservationCounter.jsx';
 
-const schema = z
+const formSchema = z
   .object({
     name: z
       .string()
@@ -72,52 +73,37 @@ const schema = z
     path: ['confirmEmail'],
   });
 
-type FormSchema = z.infer<typeof schema>;
+type FormSchema = z.infer<typeof formSchema>;
 
-const submitFormData = async ({
-  name,
-  surname,
-  email,
-  phoneNumber,
-  major,
-  tShirtSize,
-  diet,
-  file,
-  faculty,
-  year,
-}: FormSchema) => {
-  //TODO: refactor to use multipart form data
+const userResponseSchema = z.object({
+  ID: z.number(),
+  CreatedAt: z.string(),
+  UpdatedAt: z.string(),
+  DeletedAt: z.string().nullable(),
+  id: z.number(),
+  name: z.string(),
+  surname: z.string(),
+  email: z.string(),
+  phoneNumber: z.string(),
+});
 
-  const buffer = await file.arrayBuffer();
-  const byteArray = Array.from(new Uint8Array(buffer));
-
-  console.log(byteArray);
+const submitFormData = async ({ email, major, tShirtSize, diet, file, faculty, year }: FormSchema) => {
+  const formData = new FormData();
+  formData.append('Major', major);
+  formData.append('Faculty', faculty);
+  formData.append('Year', year.toString());
+  formData.append('TShirtSize', tShirtSize);
+  formData.append('Diet', diet);
+  formData.append('PaymentFile', file);
+  formData.append('FileExtension', file.type);
+  formData.append('FootSize', '42');
 
   const response = await fetch(`http://127.0.0.1:10000/users/${email}/payment/send`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      surname,
-      email,
-      phoneNumber,
-      major,
-      tShirtSize,
-      diet,
-      faculty,
-      year,
-      paymentFile: buffer,
-      fielExtension: file.type,
-    }),
+    body: formData,
   }).then((res) => res.json());
 
   return response;
-};
-
-const getUserDetails = async () => {
-  console.log('WITOJCIE');
 };
 
 const PaymentForm: Component<ParentProps> = ({ children }) => {
@@ -126,8 +112,8 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
   const [isExisting, setIsExisting] = createSignal(false);
   const [isLoading, setIsLoading] = createSignal(false);
 
-  const { form, data, setData, errors } = createForm<FormSchema>({
-    extend: [validator({ schema }), reporter()],
+  const { form, setData, data } = createForm<FormSchema>({
+    extend: [validator({ schema: formSchema }), reporter()],
     onSubmit: async (data) => {
       setIsLoading(true);
 
@@ -144,6 +130,20 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
   });
 
   const ServerMessage = isSuccess() ? SuccessMessage : ErrorMessage;
+
+  const getUserDetails = async (email: string) => {
+    const response = await fetch(`http://127.0.0.1:10000/users/${email}/`);
+
+    if (response.status === 200) {
+      const userData = userResponseSchema.parse(await response.json());
+      setData('email', userData.email);
+      setData('confirmEmail', userData.email);
+      setData('name', userData.name);
+      setData('surname', userData.surname);
+      setData('phoneNumber', userData.phoneNumber);
+      setIsExisting(true);
+    }
+  };
 
   return (
     <Container>
@@ -188,15 +188,39 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
         <FormWrapper>
           <form use:form>
             <Row>
-              <Input name="email" label="Email" placeholder="przykladowy@email.com"></Input>
-              <Input name="confirmEmail" label="Potwierdź email" placeholder="przykladowy@email.com"></Input>
+              <Input
+                value={data().email}
+                onChange={(e) => getUserDetails(e.target.value)}
+                name="email"
+                label="Email"
+                placeholder="przykladowy@email.com"
+              ></Input>
+              <Input
+                disabled={isExisting()}
+                value={data().confirmEmail}
+                name="confirmEmail"
+                label="Potwierdź email"
+                placeholder="przykladowy@email.com"
+              ></Input>
             </Row>
             <Row>
-              <Input name="name" label="Imię" placeholder="Jan"></Input>
-              <Input name="surname" label="Nazwisko" placeholder="Kowalski"></Input>
+              <Input disabled={isExisting()} value={data().name} name="name" label="Imię" placeholder="Jan"></Input>
+              <Input
+                disabled={isExisting()}
+                value={data().surname}
+                name="surname"
+                label="Nazwisko"
+                placeholder="Kowalski"
+              ></Input>
             </Row>
             <Row>
-              <Input name="phoneNumber" label="Nr telefonu" placeholder="213769420"></Input>
+              <Input
+                disabled={isExisting()}
+                value={data().phoneNumber}
+                name="phoneNumber"
+                label="Nr telefonu"
+                placeholder="213769420"
+              ></Input>
               <Select name="faculty" label="Wydział">
                 <Option value="" disabled>
                   Wybierz wydział
@@ -216,7 +240,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
             </Row>
             <Row>
               <Input name="major" label="Kierunek Studiów" placeholder="Fizyka Techniczna"></Input>
-              <Input name="year" label="Rok Studiów" type="number" min="1" max="7" />
+              <Input name="year" placeholder="1" label="Rok Studiów" type="number" min="1" max="7" />
             </Row>
             <Row>
               <Select label="Rozmiar koszulki" name="tShirtSize">

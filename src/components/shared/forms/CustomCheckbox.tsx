@@ -8,17 +8,17 @@ interface CheckboxProps {
   setIsChecked: Setter<boolean>;
 }
 
-const CustomCheckbox = ({ id, label, isChecked, setIsChecked }: CheckboxProps) => {
+const CustomCheckbox = (props: CheckboxProps) => {
   return (
     <CheckboxWrapper>
       <input
-        id={id}
-        name={id}
+        id={props.id}
+        name={props.id}
         type="checkbox"
-        checked={isChecked}
-        onChange={() => setIsChecked((isChecked) => !isChecked)}
+        checked={props.isChecked}
+        onChange={() => props.setIsChecked((isChecked) => !isChecked)}
       />
-      <label for={id} innerHTML={label} />
+      <label for={props.id} innerHTML={props.label} />
     </CheckboxWrapper>
   );
 };

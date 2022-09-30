@@ -7,12 +7,14 @@ interface InputProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-export default function Input({ name, label, placeholder, ...props }: InputProps) {
+export default function Input(props: InputProps) {
   return (
-    <InputWrapper>
-      <label for={name}>{label}</label>
-      <input name={name} placeholder={placeholder} {...props}></input>
-      <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+    <InputWrapper class={props.disabled ? 'disabled' : ''}>
+      <label for={props.name}>{props.label}</label>
+      <input {...props} name={props.name} placeholder={props.placeholder}></input>
+      <ValidationMessage for={props.name}>
+        {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
+      </ValidationMessage>
     </InputWrapper>
   );
 }
@@ -90,5 +92,19 @@ const InputWrapper = styled.div`
     line-height: 28px;
     color: #300f07;
     text-transform: uppercase;
+  }
+
+  &.disabled {
+    & > input,
+    & > label {
+      color: #300f0725 !important;
+    }
+
+    & > input {
+      background: #cbc3c1;
+
+      border: 2px solid rgba(48, 15, 7, 0.25);
+      border-radius: 10px;
+    }
   }
 `;
