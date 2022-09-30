@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { createForm } from '@felte/solid';
 import { Component, createSignal, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
-import { reporter, ValidationMessage } from '@felte/reporter-solid';
+import { reporter } from '@felte/reporter-solid';
 
 const MAX_FILE_SIZE = 500000;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
@@ -60,7 +60,7 @@ const schema = z
     tShirtSize: z.string().min(1, { message: 'To pole nie może być puste' }),
     diet: z.string().min(1, { message: 'To pole nie może być puste' }),
     file: z
-      .instanceof(File, { message: 'Plik jest wymagany' })
+      .instanceof(File, { message: 'Nie wybrano żadnego pliku.' })
       .refine((file) => file.size <= MAX_FILE_SIZE, `Maksymalny rozmiar pliku to 5MB.`)
       .refine(
         (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
@@ -86,6 +86,8 @@ const submitFormData = async ({
   faculty,
   year,
 }: FormSchema) => {
+  //TODO: refactor to use multipart form data
+
   const buffer = await file.arrayBuffer();
   const byteArray = Array.from(new Uint8Array(buffer));
 
@@ -112,6 +114,10 @@ const submitFormData = async ({
   }).then((res) => res.json());
 
   return response;
+};
+
+const getUserDetails = async () => {
+  console.log('WITOJCIE');
 };
 
 const PaymentForm: Component<ParentProps> = ({ children }) => {
