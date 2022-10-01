@@ -6,7 +6,7 @@ import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
 const MAX_FILE_SIZE = 500000;
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
 import Input from '../shared/forms/Input.jsx';
 import Loader from 'components/shared/Loader.jsx';
@@ -32,6 +32,7 @@ import Select from 'components/shared/forms/Select.jsx';
 import Option from 'components/shared/forms/Option.jsx';
 import FileInput from 'components/shared/forms/FileInput.jsx';
 import ReservationCounter from 'components/payment/ReservationCounter.jsx';
+import { styled } from 'solid-styled-components';
 
 const formSchema = z
   .object({
@@ -64,8 +65,8 @@ const formSchema = z
       .instanceof(File, { message: 'Nie wybrano żadnego pliku.' })
       .refine((file) => file.size <= MAX_FILE_SIZE, `Maksymalny rozmiar pliku to 5MB.`)
       .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
-        'pliki w formacie .jpg, .jpeg, .png and .webp. są akceptowane',
+        (file) => ACCEPTED_FILE_TYPES.includes(file.type),
+        'tylko pliki w formacie .jpg, .jpeg, .png and .webp. i .pdf są akceptowane',
       ),
   })
   .refine((data) => data.email === data.confirmEmail, {
@@ -87,6 +88,8 @@ const userResponseSchema = z.object({
   phoneNumber: z.string(),
 });
 
+const BASE_URL = `http://127.0.0.1:10000`;
+
 const submitFormData = async ({ email, major, tShirtSize, diet, file, faculty, year }: FormSchema) => {
   const formData = new FormData();
   formData.append('Major', major);
@@ -98,7 +101,7 @@ const submitFormData = async ({ email, major, tShirtSize, diet, file, faculty, y
   formData.append('FileExtension', file.type);
   formData.append('FootSize', '42');
 
-  const response = await fetch(`http://127.0.0.1:10000/users/${email}/payment/send`, {
+  const response = await fetch(`${BASE_URL}/users/${email}/payment/send`, {
     method: 'POST',
     body: formData,
   }).then((res) => res.json());
@@ -110,6 +113,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
   const [message, setMessage] = createSignal('');
   const [isSuccess, setIsSuccess] = createSignal(false);
   const [isExisting, setIsExisting] = createSignal(false);
+  const [reservationDate, setReservationDate] = createSignal<Date>();
   const [isLoading, setIsLoading] = createSignal(false);
 
   const { form, setData, data } = createForm<FormSchema>({
@@ -131,8 +135,18 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
 
   const ServerMessage = isSuccess() ? SuccessMessage : ErrorMessage;
 
+  const startPayment = async (email: string) => {
+    const response = await fetch(`${BASE_URL}/users/${email}/payment/start`);
+    if (response.status !== 200) {
+      setMessage('Nie można zarezerwować miejsca.');
+    } else {
+      const data = await response.json();
+      setReservationDate(new Date(data.message));
+    }
+  };
+
   const getUserDetails = async (email: string) => {
-    const response = await fetch(`http://127.0.0.1:10000/users/${email}/`);
+    const response = await fetch(`${BASE_URL}/users/${email}/`);
 
     if (response.status === 200) {
       const userData = userResponseSchema.parse(await response.json());
@@ -141,7 +155,12 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       setData('name', userData.name);
       setData('surname', userData.surname);
       setData('phoneNumber', userData.phoneNumber);
-      setIsExisting(true);
+      try {
+        await startPayment(userData.email);
+        setIsExisting(true);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -151,7 +170,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
       <MainContent>
         <InfoCards>
-          <div>header</div>
+          {reservationDate() && <ReservationCounter startDate={reservationDate() ?? new Date()} />}
           <Card>
             <CardHeader>Dane do przelewu</CardHeader>
             <CardSubheader>KWOTA</CardSubheader>
@@ -265,10 +284,10 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
               </Select>
             </Row>
             <Row>
-              <FileInput name="file" label="Dowód przelewu" />
+              <FileInput fileName={data().file ? data().file.name : ''} name="file" label="Dowód przelewu" />
+              <SubmitButton isLoading={isLoading()}>{isLoading() ? <Loader size={40} /> : children}</SubmitButton>
             </Row>
-            <SubmitButton isLoading={isLoading()}>{isLoading() ? <Loader size={40} /> : children}</SubmitButton>
-            {message() ? <ServerMessage>{message()}</ServerMessage> : null}
+            <Message>{message() ? <ServerMessage>{message()}</ServerMessage> : null}</Message>
           </form>
         </FormWrapper>
       </MainContent>
@@ -277,3 +296,11 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
 };
 
 export default PaymentForm;
+
+const Message = styled.div`
+  margin: 1.5rem 0 0 0;
+
+  & * {
+    font-size: 18px;
+  }
+`;

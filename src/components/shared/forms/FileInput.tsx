@@ -5,6 +5,7 @@ import type { JSX } from 'solid-js';
 interface InputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   name: string;
   label: string;
+  fileName: string;
 }
 
 export default function FileInput(props: InputProps) {
@@ -12,7 +13,9 @@ export default function FileInput(props: InputProps) {
     <InputWrapper>
       <label for={props.name}>{props.label}</label>
       <div class="wrapper">
-        <span class="fake-input">Wybierz plik</span>
+        <span class={`fake-input ${props.fileName ? 'attached-file' : ''}`}>
+          {props.fileName ? props.fileName : 'Wybierz plik...'}
+        </span>
         <input {...props} name={props.name} type="file"></input>
         <ValidationMessage for={props.name}>
           {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
@@ -65,7 +68,7 @@ const InputWrapper = styled.div`
   }
 
   & input {
-    width: 97px;
+    width: 120px;
     height: 34px;
     opacity: 0;
     cursor: pointer;
@@ -95,6 +98,10 @@ const InputWrapper = styled.div`
       color: white;
 
       cursor: pointer;
+
+      &.attached-file {
+        background-color: var(--yellow);
+      }
     }
   }
 
@@ -102,7 +109,7 @@ const InputWrapper = styled.div`
     font-weight: 700;
     font-size: 14px;
     line-height: 28px;
-    color: #300f07;
+    color: var(--brown);
     text-transform: uppercase;
   }
 `;
