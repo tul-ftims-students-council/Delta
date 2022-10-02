@@ -31,6 +31,18 @@ const Header = ({ activeRoute, children }: Props) => {
     }, 100);
   };
 
+  // TODO: Refactor this hideous thing
+  const getLinkValue = (key: string) => {
+    switch (key) {
+      case 'termsConditions':
+        return '/regulamin.pdf';
+      case 'register':
+        return '/register';
+      default:
+        return `/#${key}`;
+    }
+  };
+
   return (
     <HeaderWrapper>
       <div>
@@ -43,10 +55,7 @@ const Header = ({ activeRoute, children }: Props) => {
               <ul>
                 {Object.entries(routes).map(([key, value]) => (
                   <li class={value === activeRoute ? 'active' : ''}>
-                    <a
-                      href={key === 'termsConditions' ? '/regulamin.pdf' : `/#${key}`}
-                      onClick={() => handleNavClick(key)}
-                    >
+                    <a href={getLinkValue(key)} onClick={() => handleNavClick(key)}>
                       {value}
                     </a>
                   </li>
@@ -120,6 +129,10 @@ const Navigation = styled.nav<NavigationProps>`
     display: flex;
     list-style-type: none;
     gap: 40px;
+
+    li {
+      font-size: 16px;
+    }
   }
 
   a {
