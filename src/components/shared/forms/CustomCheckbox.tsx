@@ -6,11 +6,18 @@ interface CheckboxProps {
   label: string;
   isChecked: boolean;
   setIsChecked: Setter<boolean>;
+  center?: boolean;
+  noMargin?: boolean;
+}
+
+interface WrapperProps {
+  center?: boolean;
+  noMargin?: boolean;
 }
 
 const CustomCheckbox = (props: CheckboxProps) => {
   return (
-    <CheckboxWrapper>
+    <CheckboxWrapper center={props.center} noMargin={props.noMargin}>
       <input
         id={props.id}
         name={props.id}
@@ -23,10 +30,10 @@ const CustomCheckbox = (props: CheckboxProps) => {
   );
 };
 
-const CheckboxWrapper = styled.div`
+const CheckboxWrapper = styled.div<WrapperProps>`
   display: flex;
-  align-items: flex-start;
-  margin-top: 15px;
+  align-items: ${({ center }) => (center ? 'center' : 'flex-start')};
+  margin-top: ${({ noMargin }) => (noMargin ? '0' : '15px')};
 
   @media (max-width: 722px) {
     margin-top: 8px;

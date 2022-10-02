@@ -61,8 +61,8 @@ const Header = ({ activeRoute, children }: Props) => {
                   </li>
                 ))}
                 <RegisterLi>
-                  <a href="/register" onClick={() => setMenuOpen(false)}>
-                    Zarejestruj się
+                  <a href="/payment" onClick={() => setMenuOpen(false)}>
+                    Opłać uczestnictwo
                   </a>
                 </RegisterLi>
               </ul>
