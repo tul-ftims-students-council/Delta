@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { createForm } from '@felte/solid';
-import { Component, createSignal, ParentProps } from 'solid-js';
+import { Component, createSignal, onMount, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
@@ -109,12 +109,23 @@ const submitFormData = async ({ email, major, tShirtSize, diet, file, faculty, y
   return response;
 };
 
+const getRemainingPlaces = async () => {
+  const response = await fetch(`${BASE_URL}/reservations/left`).then((res) => res.json());
+  return response;
+};
+
 const PaymentForm: Component<ParentProps> = ({ children }) => {
   const [message, setMessage] = createSignal('');
   const [isSuccess, setIsSuccess] = createSignal(false);
   const [isExisting, setIsExisting] = createSignal(false);
+  const [remainingPlaces, setRemainingPlaces] = createSignal(0);
   const [reservationDate, setReservationDate] = createSignal<Date>();
   const [isLoading, setIsLoading] = createSignal(false);
+
+  onMount(async () => {
+    const remainingPlaces = await getRemainingPlaces();
+    setRemainingPlaces(remainingPlaces);
+  });
 
   const { form, setData, data } = createForm<FormSchema>({
     extend: [validator({ schema: formSchema }), reporter()],
@@ -124,7 +135,8 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       try {
         const response = await submitFormData(data);
         setIsSuccess(response.statusCode === 200);
-        setMessage(response.message);
+        setRemainingPlaces((remainingPlaces) => remainingPlaces - 1);
+        setMessage('Formularz został poprawnie wysłany, dziękujemy!');
       } catch (err) {
         console.error(err);
       } finally {
@@ -168,6 +180,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
     <Container>
       <FormTitle>Płatności</FormTitle>
       <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
+      <FormSubtitle>Spiesz się! Pozostało {remainingPlaces()} miejsc.</FormSubtitle>
       <MainContent>
         <InfoCards>
           {reservationDate() && <ReservationCounter startDate={reservationDate() ?? new Date()} />}
