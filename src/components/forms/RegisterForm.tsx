@@ -19,6 +19,7 @@ import {
   SubmitButton,
   FormTitle,
 } from 'components/shared/forms/Styles.jsx';
+import { BASE_URL } from 'config/api.js';
 
 const REGULAMIN = `Akceptuję regulamin wyjazdu wyjazdu integracyjno-szkoleniowego "Delta 2022" dostępny <a href="/regulamin.pdf">pod tym adresem</a> i oświadczam, że zapoznałam / zapoznałem się z jego treścią.`;
 const RODO = `Wyrażam zgodę na przetwarzanie moich danych osobowych przez Politechnikę Łódzką, adres siedziby: ul.
@@ -63,7 +64,7 @@ const schema = z
 type FormSchema = z.infer<typeof schema>;
 
 const submitFormData = async ({ name, surname, email, phoneNumber }: FormSchema) => {
-  const response = await fetch(`http://127.0.0.1:10000/users/register`, {
+  const response = await fetch(`${BASE_URL}}/users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

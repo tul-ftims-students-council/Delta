@@ -34,6 +34,7 @@ import FileInput from 'components/shared/forms/FileInput.jsx';
 import ReservationCounter from 'components/payment/ReservationCounter.jsx';
 import { styled } from 'solid-styled-components';
 import CustomCheckbox from 'components/shared/forms/CustomCheckbox.jsx';
+import { BASE_URL } from 'config/api.js';
 
 const formSchema = z
   .object({
@@ -96,8 +97,6 @@ const userResponseSchema = z.object({
   email: z.string(),
   phoneNumber: z.string(),
 });
-
-const BASE_URL = `https://delta-go.onrender.com`;
 
 const submitFormData = async ({
   email,
