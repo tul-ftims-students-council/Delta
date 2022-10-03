@@ -76,10 +76,7 @@ const formSchema = z
       .number({ required_error: 'To pole nie może być puste', invalid_type_error: 'Wartość musi być liczbą' })
       .min(30, { message: 'Niepoprawny rozmiar buta' })
       .max(50, { message: 'Niepoprawny rozmiar buta' }),
-    invoice_address: z
-      .string()
-      .min(3, { message: 'Musi zawierać conajmniej 3 znaki' })
-      .max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }),
+    invoice_address: z.string().max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: 'Podane adresy email różnią się od siebie',
