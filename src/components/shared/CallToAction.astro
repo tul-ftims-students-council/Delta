@@ -4,16 +4,25 @@ import Container from 'components/shared/Container.astro';
 import RegularText from 'components/shared/RegularText.astro';
 import SectionHeader from 'components/shared/SectionHeader.astro';
 import SectionSubtitle from 'components/shared/SectionSubtitle.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+const { title, subtitle, buttonLink, buttonText } = Astro.props;
 ---
 
 <Container>
   <div class="wrapper">
     <div class="content flex-column">
       <div class="text-wrapper flex-column">
-        <SectionHeader textAlign="center">Chętny na wyjazd?</SectionHeader>
-        <SectionSubtitle textAlign="center">Wypełnij formularz i bądź na bieżąco!</SectionSubtitle>
+        <SectionHeader textAlign="center">{title}</SectionHeader>
+        <SectionSubtitle textAlign="center">{subtitle}</SectionSubtitle>
       </div>
-      <Button type="link" href="/register">Zarejestruj się</Button>
+      <Button type="link" href={buttonLink}>{buttonText}</Button>
       <div class="text-wrapper flex-column hide">
         <RegularText color="white" textAlign="center">Masz więcej pytań?</RegularText>
         <RegularText color="white" textAlign="center">

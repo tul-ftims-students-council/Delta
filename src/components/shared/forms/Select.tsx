@@ -1,19 +1,22 @@
 import { styled } from 'solid-styled-components';
 import { ValidationMessage } from '@felte/reporter-solid';
+import type { JSX } from 'solid-js';
 
-interface InputProps {
+interface SelectProps extends JSX.InputHTMLAttributes<HTMLSelectElement> {
   name: string;
-  type?: string;
   label: string;
-  placeholder?: string;
 }
 
-export default function Input({ name, type = 'text', label, placeholder }: InputProps) {
+export default function Select(props: SelectProps) {
   return (
     <InputWrapper>
-      <label for={name}>{label}</label>
-      <input type={type} name={name} placeholder={placeholder}></input>
-      <ValidationMessage for={name}>{(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}</ValidationMessage>
+      <label for={props.name}>{props.label}</label>
+      <select {...props} name={props.name}>
+        <optgroup>{props.children}</optgroup>
+      </select>
+      <ValidationMessage for={props.name}>
+        {(messages) => <ErrorMessage>{messages?.[0]}</ErrorMessage>}
+      </ValidationMessage>
     </InputWrapper>
   );
 }
@@ -34,13 +37,18 @@ const InputWrapper = styled.div`
   justify-content: center;
 
   /* Chrome, Safari, Edge, Opera */
-  & > input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
+  & > select::-webkit-outer-spin-button,
+  select::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  & > input {
+  & option {
+    font-size: 14px;
+    font-family: Inter;
+  }
+
+  & > select {
     font-size: 14px;
     font-family: Inter;
     font-weight: 600;
@@ -53,6 +61,7 @@ const InputWrapper = styled.div`
     color: #e4780c;
     width: 15vw;
     min-width: 170px;
+    min-height: 44px;
 
     @media (max-width: 1500px) {
       width: 16vw;
@@ -69,6 +78,11 @@ const InputWrapper = styled.div`
     }
     /* Firefox */
     -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &::placeholder {
       font-size: 14px;

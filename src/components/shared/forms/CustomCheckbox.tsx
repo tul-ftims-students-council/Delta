@@ -6,27 +6,34 @@ interface CheckboxProps {
   label: string;
   isChecked: boolean;
   setIsChecked: Setter<boolean>;
+  center?: boolean;
+  noMargin?: boolean;
 }
 
-const CustomCheckbox = ({ id, label, isChecked, setIsChecked }: CheckboxProps) => {
+interface WrapperProps {
+  center?: boolean;
+  noMargin?: boolean;
+}
+
+const CustomCheckbox = (props: CheckboxProps) => {
   return (
-    <CheckboxWrapper>
+    <CheckboxWrapper center={props.center} noMargin={props.noMargin}>
       <input
-        id={id}
-        name={id}
+        id={props.id}
+        name={props.id}
         type="checkbox"
-        checked={isChecked}
-        onChange={() => setIsChecked((isChecked) => !isChecked)}
+        checked={props.isChecked}
+        onChange={() => props.setIsChecked((isChecked) => !isChecked)}
       />
-      <label for={id} innerHTML={label} />
+      <label for={props.id} innerHTML={props.label} />
     </CheckboxWrapper>
   );
 };
 
-const CheckboxWrapper = styled.div`
+const CheckboxWrapper = styled.div<WrapperProps>`
   display: flex;
-  align-items: flex-start;
-  margin-top: 15px;
+  align-items: ${({ center }) => (center ? 'center' : 'flex-start')};
+  margin-top: ${({ noMargin }) => (noMargin ? '0' : '15px')};
 
   @media (max-width: 722px) {
     margin-top: 8px;
@@ -42,6 +49,10 @@ const CheckboxWrapper = styled.div`
     border: 1px solid black;
     margin-right: 20px;
     position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     &:checked {
       border: 1px solid black;

@@ -4,7 +4,7 @@ import Banner from 'components/index/banner/Banner.astro';
 import Partners from 'components/index/Partners.astro';
 import Gallery from 'components/index/gallery/Gallery.astro';
 import FAQ from 'components/index/FAQ.astro';
-import CallToAction from 'components/index/CallToAction.astro';
+import CallToAction from 'components/shared/CallToAction.astro';
 import About from 'components/index/About.astro';
 ---
 
@@ -15,7 +15,12 @@ import About from 'components/index/About.astro';
     <Partners />
     <Gallery />
     <FAQ />
-    <CallToAction />
+    <CallToAction
+      title="Chętny na wyjazd?"
+      subtitle="Wypełnij formularz i bądź na bieżąco!"
+      buttonText="Opłać uczestnictwo"
+      buttonLink="/payment"
+    />
   </main>
 </Layout>
 

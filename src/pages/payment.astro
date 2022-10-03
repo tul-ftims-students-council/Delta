@@ -1,0 +1,24 @@
+---
+import Layout from 'layout/Layout.astro';
+import PaymentForm from 'components/forms/PaymentForm';
+import Button from 'components/shared/Button.astro';
+import CallToAction from 'components/shared/CallToAction.astro';
+---
+
+<Layout title="DELTA - płatność">
+  <main>
+    <PaymentForm client:only="solid-js"><Button type="submit">Potwierdź</Button></PaymentForm>
+    <CallToAction
+      title="Chętny na wyjazd?"
+      subtitle="Śledź nas na Facebooku i bądź na bieżąco!"
+      buttonText="Przenieś mnie"
+      buttonLink="https://www.facebook.com/DeltaFTIMS"
+    />
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 3rem 0;
+  }
+</style>

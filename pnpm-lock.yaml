@@ -6,6 +6,7 @@ specifiers:
   '@felte/reporter-solid': ^1.2.3
   '@felte/solid': ^1.2.3
   '@felte/validator-zod': ^1.0.11
+  '@solid-primitives/scheduled': ^1.0.2
   '@supabase/supabase-js': 2.0.0-rc.10
   astro: ^1.1.5
   dayjs: ^1.11.5
@@ -20,6 +21,7 @@ dependencies:
   '@felte/reporter-solid': 1.2.3_solid-js@1.5.4
   '@felte/solid': 1.2.3_solid-js@1.5.4
   '@felte/validator-zod': 1.0.11_zod@3.18.0
+  '@solid-primitives/scheduled': 1.0.2_solid-js@1.5.4
   '@supabase/supabase-js': 2.0.0-rc.10
   astro: 1.1.5
   dayjs: 1.11.5
@@ -525,6 +527,14 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       tsm: 2.2.2
+    dev: false
+
+  /@solid-primitives/scheduled/1.0.2_solid-js@1.5.4:
+    resolution: {integrity: sha512-Qs+KyqVxKIFXlCNwHvNKl7CLsexsE1eNaKShkkZQz1jA1OC9YhdZeFkNjAyqGqZ4BHZOTQsKRW7XAefhDVjeuw==}
+    peerDependencies:
+      solid-js: ^1.4.0
+    dependencies:
+      solid-js: 1.5.4
     dev: false
 
   /@supabase/functions-js/2.0.0-rc.2:
