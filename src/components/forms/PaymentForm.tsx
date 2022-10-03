@@ -76,7 +76,7 @@ const formSchema = z
       .number({ required_error: 'To pole nie może być puste', invalid_type_error: 'Wartość musi być liczbą' })
       .min(30, { message: 'Niepoprawny rozmiar buta' })
       .max(50, { message: 'Niepoprawny rozmiar buta' }),
-    invoice_address: z.string().max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }),
+    invoice_address: z.string().max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }).optional(),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: 'Podane adresy email różnią się od siebie',
@@ -117,7 +117,7 @@ const submitFormData = async ({
   formData.append('PaymentFile', file);
   formData.append('FileExtension', file.type);
   formData.append('FootSize', footSize.toString());
-  formData.append('InvoiceAddress', invoice_address);
+  formData.append('InvoiceAddress', invoice_address ?? '');
 
   const response = await fetch(`${BASE_URL}/users/${email}/payment/send`, {
     method: 'POST',
