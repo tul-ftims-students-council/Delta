@@ -1,6 +1,7 @@
 import { styled } from 'solid-styled-components';
 
 const styles = `
+  display: initial;
   margin: 0;
   padding: 12px 19px;
   border: none;
@@ -60,7 +61,7 @@ const styles = `
     &.primary {
       background-color: var(--gray-color-250);
     }
-    
+
     &.secondary {
       color: var(--gray-color-250);
     }
@@ -77,6 +78,6 @@ export const StyledButton = styled.button`
   ${styles}
 `;
 
-export const StyledLink = styled.link`
+export const StyledLink = styled.a`
   ${styles}
 `;
