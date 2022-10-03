@@ -64,7 +64,7 @@ const schema = z
 type FormSchema = z.infer<typeof schema>;
 
 const submitFormData = async ({ name, surname, email, phoneNumber }: FormSchema) => {
-  const response = await fetch(`${BASE_URL}}/users/register`, {
+  const response = await fetch(`${BASE_URL}/users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
