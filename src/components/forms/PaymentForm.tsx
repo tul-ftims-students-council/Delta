@@ -5,7 +5,7 @@ import { Component, createSignal, onMount, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
-const MAX_FILE_SIZE = 500000;
+const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
 import Input from '../shared/forms/Input.jsx';
