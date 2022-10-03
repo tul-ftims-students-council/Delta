@@ -118,7 +118,7 @@ const submitFormData = async ({
   formData.append('Diet', diet);
   formData.append('PaymentFile', file);
   formData.append('FileExtension', file.type);
-  formData.append('FootSize', footSize);
+  formData.append('FootSize', footSize.toString());
   formData.append('InvoiceAddress', invoice_address);
 
   const response = await fetch(`${BASE_URL}/users/${email}/payment/send`, {
@@ -198,11 +198,11 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
   };
 
   const hasPaymentsStarted = Date.now() > Date.parse('03 Oct 2022 18:00:00');
-  const areThereAnyPlacesLeft = remainingPlaces() > 0;
+  const areThereAnyPlacesLeft = () => remainingPlaces() > 0;
 
   return (
     <Container>
-      {hasPaymentsStarted && areThereAnyPlacesLeft ? (
+      {hasPaymentsStarted && areThereAnyPlacesLeft() ? (
         <>
           <FormTitle>Płatności</FormTitle>
           <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
