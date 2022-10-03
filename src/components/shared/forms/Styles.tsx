@@ -104,10 +104,15 @@ export const FormSubtitle = styled.p`
   font-family: Inter;
   color: #300f07;
   max-width: 60vw;
+  text-align: center;
 
   @media (max-width: 722px) {
     font-size: 12px;
   }
+`;
+
+export const Bolder = styled.span`
+  font-weight: bolder;
 `;
 
 export const FormWrapper = styled.div`

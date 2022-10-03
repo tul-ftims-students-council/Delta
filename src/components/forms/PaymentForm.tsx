@@ -5,7 +5,7 @@ import { Component, createSignal, onMount, ParentProps } from 'solid-js';
 import { validator } from '@felte/validator-zod';
 import { reporter } from '@felte/reporter-solid';
 
-const MAX_FILE_SIZE = 500000;
+const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
 
 import Input from '../shared/forms/Input.jsx';
@@ -27,6 +27,7 @@ import {
   CardSubtitle,
   CardSubheaderBottom,
   CardSubtitleBottom,
+  Bolder,
 } from 'components/shared/forms/Styles.jsx';
 import Select from 'components/shared/forms/Select.jsx';
 import Option from 'components/shared/forms/Option.jsx';
@@ -35,6 +36,7 @@ import ReservationCounter from 'components/payment/ReservationCounter.jsx';
 import { styled } from 'solid-styled-components';
 import CustomCheckbox from 'components/shared/forms/CustomCheckbox.jsx';
 import { BASE_URL } from 'config/api.js';
+import Button from 'components/shared/Button/Button.jsx';
 
 const formSchema = z
   .object({
@@ -74,10 +76,7 @@ const formSchema = z
       .number({ required_error: 'To pole nie może być puste', invalid_type_error: 'Wartość musi być liczbą' })
       .min(30, { message: 'Niepoprawny rozmiar buta' })
       .max(50, { message: 'Niepoprawny rozmiar buta' }),
-    invoice_address: z
-      .string()
-      .min(3, { message: 'Musi zawierać conajmniej 3 znaki' })
-      .max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }),
+    invoice_address: z.string().max(200, { message: 'Moze zawierać maksymalnie 200 znaków' }).optional(),
   })
   .refine((data) => data.email === data.confirmEmail, {
     message: 'Podane adresy email różnią się od siebie',
@@ -118,7 +117,7 @@ const submitFormData = async ({
   formData.append('PaymentFile', file);
   formData.append('FileExtension', file.type);
   formData.append('FootSize', footSize.toString());
-  formData.append('InvoiceAddress', invoice_address);
+  formData.append('InvoiceAddress', invoice_address ?? '');
 
   const response = await fetch(`${BASE_URL}/users/${email}/payment/send`, {
     method: 'POST',
@@ -133,7 +132,7 @@ const getRemainingPlaces = async () => {
   return response;
 };
 
-const PaymentForm: Component<ParentProps> = ({ children }) => {
+const PaymentForm: Component<ParentProps> = () => {
   const [message, setMessage] = createSignal('');
   const [isSuccess, setIsSuccess] = createSignal(false);
   const [isExisting, setIsExisting] = createSignal(false);
@@ -147,7 +146,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
     setRemainingPlaces(remainingPlaces);
   });
 
-  const { form, setData, data } = createForm<FormSchema>({
+  const { form, setData, data, setErrors } = createForm<FormSchema>({
     extend: [validator({ schema: formSchema }), reporter()],
     onSubmit: async (data) => {
       setIsLoading(true);
@@ -193,6 +192,9 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       } catch (err) {
         console.error(err);
       }
+    } else {
+      setErrors('email', 'Podany adres e-mail nie został zarejestrowany');
+      setIsExisting(false);
     }
   };
 
@@ -204,7 +206,10 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       {hasPaymentsStarted && areThereAnyPlacesLeft() ? (
         <>
           <FormTitle>Płatności</FormTitle>
-          <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
+          <FormSubtitle>
+            <Bolder>Wypełnij formularz adresem e-mail podanym w rejestracji</Bolder>, uzupełnij resztę danych, zrób
+            przelew i zagwarantuj sobie miejsce na wyjeździe.
+          </FormSubtitle>
           <FormSubtitle>Spiesz się! Pozostało {remainingPlaces()} miejsc.</FormSubtitle>
           <MainContent>
             <InfoCards>
@@ -250,6 +255,11 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
                   <Input
                     value={data().email}
                     onChange={(e) => getUserDetails(e.target.value)}
+                    onFocusOut={() => {
+                      if (isExisting() === false) {
+                        setErrors('email', 'Podany adres e-mail nie został zarejestrowany');
+                      }
+                    }}
                     name="email"
                     label="Email"
                     placeholder="przykladowy@email.com"
@@ -341,7 +351,15 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
                 )}
                 <Row>
                   <FileInput fileName={data().file ? data().file.name : ''} name="file" label="Dowód przelewu" />
-                  <SubmitButton isLoading={isLoading()}>{isLoading() ? <Loader size={40} /> : children}</SubmitButton>
+                  <SubmitButton isLoading={isLoading()}>
+                    {isLoading() ? (
+                      <Loader size={40} />
+                    ) : (
+                      <Button type="submit" disabled={!isExisting()}>
+                        Potwierdź
+                      </Button>
+                    )}
+                  </SubmitButton>
                 </Row>
                 <Message>{message() ? <ServerMessage>{message()}</ServerMessage> : null}</Message>
               </form>

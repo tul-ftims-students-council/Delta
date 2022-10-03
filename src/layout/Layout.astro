@@ -9,7 +9,6 @@ import routes from '../utils/routes';
 import 'styles/lemonmilk.css';
 import Header from './Header';
 import Footer from './Footer.astro';
-import Button from 'components/shared/Button.astro';
 ---
 
 <!DOCTYPE html>
@@ -25,9 +24,7 @@ import Button from 'components/shared/Button.astro';
     <title>{title}</title>
   </head>
   <body>
-    <Header client:only="solid-js" activeRoute={routes.home}>
-      <Button type="link" href="/payment">Opłać uczestnictwo</Button>
-    </Header>
+    <Header client:only="solid-js" activeRoute={routes.home} />
     <slot />
     <Footer />
 
