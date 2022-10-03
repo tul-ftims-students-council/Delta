@@ -27,6 +27,7 @@ import {
   CardSubtitle,
   CardSubheaderBottom,
   CardSubtitleBottom,
+  Bolder,
 } from 'components/shared/forms/Styles.jsx';
 import Select from 'components/shared/forms/Select.jsx';
 import Option from 'components/shared/forms/Option.jsx';
@@ -35,6 +36,7 @@ import ReservationCounter from 'components/payment/ReservationCounter.jsx';
 import { styled } from 'solid-styled-components';
 import CustomCheckbox from 'components/shared/forms/CustomCheckbox.jsx';
 import { BASE_URL } from 'config/api.js';
+import Button from 'components/shared/Button/Button.jsx';
 
 const formSchema = z
   .object({
@@ -133,7 +135,7 @@ const getRemainingPlaces = async () => {
   return response;
 };
 
-const PaymentForm: Component<ParentProps> = ({ children }) => {
+const PaymentForm: Component<ParentProps> = () => {
   const [message, setMessage] = createSignal('');
   const [isSuccess, setIsSuccess] = createSignal(false);
   const [isExisting, setIsExisting] = createSignal(false);
@@ -147,7 +149,7 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
     setRemainingPlaces(remainingPlaces);
   });
 
-  const { form, setData, data } = createForm<FormSchema>({
+  const { form, setData, data, setErrors } = createForm<FormSchema>({
     extend: [validator({ schema: formSchema }), reporter()],
     onSubmit: async (data) => {
       setIsLoading(true);
@@ -193,10 +195,13 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       } catch (err) {
         console.error(err);
       }
+    } else {
+      setErrors('email', 'Podany adres e-mail nie został zarejestrowany');
+      setIsExisting(false);
     }
   };
 
-  const hasPaymentsStarted = Date.now() > Date.parse('03 Oct 2022 18:00:00');
+  const hasPaymentsStarted = Date.now() > Date.parse('01 Oct 2022 18:00:00');
   const areThereAnyPlacesLeft = () => remainingPlaces() > 0;
 
   return (
@@ -204,7 +209,10 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
       {hasPaymentsStarted && areThereAnyPlacesLeft() ? (
         <>
           <FormTitle>Płatności</FormTitle>
-          <FormSubtitle>Wypełnij formularz, zrób przelew i zagwarantuj sobie miejsce na wyjeździe.</FormSubtitle>
+          <FormSubtitle>
+            <Bolder>Wypełnij formularz adresem e-mail podanym w rejestracji</Bolder>, uzupełnij resztę danych, zrób
+            przelew i zagwarantuj sobie miejsce na wyjeździe.
+          </FormSubtitle>
           <FormSubtitle>Spiesz się! Pozostało {remainingPlaces()} miejsc.</FormSubtitle>
           <MainContent>
             <InfoCards>
@@ -250,6 +258,11 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
                   <Input
                     value={data().email}
                     onChange={(e) => getUserDetails(e.target.value)}
+                    onFocusOut={() => {
+                      if (isExisting() === false) {
+                        setErrors('email', 'Podany adres e-mail nie został zarejestrowany');
+                      }
+                    }}
                     name="email"
                     label="Email"
                     placeholder="przykladowy@email.com"
@@ -341,7 +354,15 @@ const PaymentForm: Component<ParentProps> = ({ children }) => {
                 )}
                 <Row>
                   <FileInput fileName={data().file ? data().file.name : ''} name="file" label="Dowód przelewu" />
-                  <SubmitButton isLoading={isLoading()}>{isLoading() ? <Loader size={40} /> : children}</SubmitButton>
+                  <SubmitButton isLoading={isLoading()}>
+                    {isLoading() ? (
+                      <Loader size={40} />
+                    ) : (
+                      <Button type="submit" disabled={!isExisting()}>
+                        Potwierdź
+                      </Button>
+                    )}
+                  </SubmitButton>
                 </Row>
                 <Message>{message() ? <ServerMessage>{message()}</ServerMessage> : null}</Message>
               </form>
