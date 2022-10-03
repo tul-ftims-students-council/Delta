@@ -201,7 +201,7 @@ const PaymentForm: Component<ParentProps> = () => {
     }
   };
 
-  const hasPaymentsStarted = Date.now() > Date.parse('01 Oct 2022 18:00:00');
+  const hasPaymentsStarted = Date.now() > Date.parse('03 Oct 2022 18:00:00');
   const areThereAnyPlacesLeft = () => remainingPlaces() > 0;
 
   return (
