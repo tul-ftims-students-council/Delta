@@ -97,7 +97,7 @@ const userResponseSchema = z.object({
   phoneNumber: z.string(),
 });
 
-const BASE_URL = `http://127.0.0.1:10000`;
+const BASE_URL = `https://delta-go.onrender.com`;
 
 const submitFormData = async ({
   email,
